@@ -1,0 +1,31 @@
+{
+  "name": "TODO",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "nyc mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/step-batch-7/todo-rahitkar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/step-batch-7/todo-rahitkar/issues"
+  },
+  "homepage": "https://github.com/step-batch-7/todo-rahitkar#readme",
+  "devDependencies": {
+    "mocha": "^7.0.1",
+    "nyc": "^15.0.0",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "eslint": "^6.8.0"
+  }
+}
