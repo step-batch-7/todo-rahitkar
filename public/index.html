@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./js/changeSize.js"></script>
+    <script src="./js/makeTodoCard.js"></script>
+    <title>todo</title>
+  </head>
+
+  <body>
+    <div id="screen">
+      <div class="header">
+        <img src="./img/logo.png" alt="" height="50px" width="40px" />
+        <h1>Todo</h1>
+      </div>
+      <div id="writeTodo">
+          <textarea
+            name="title"
+            id="title"
+            cols="20"
+            placeholder="title"
+            rows="1"
+            onclick="changeSize(20, 2, 'title')"
+            onmouseout="changeSize(20, 1, 'title')"
+          ></textarea
+          ><br />
+          <textarea
+            name="comments"
+            id="todoBox"
+            cols="40"
+            placeholder="write your todo here(use enter for new item)"
+            rows="4"
+            onclick="changeSize(40, 6, 'todoBox')"
+            onmouseout="changeSize(40, 4, 'todoBox')"
+          ></textarea
+          ><br />
+          <button onclick="makeTodoCard()"> add todo </button>
+      </div>
+      <br />
+      <div id="todoList">
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

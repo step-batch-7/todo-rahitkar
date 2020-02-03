@@ -1,2 +1,72 @@
+//////////
+
+dataStructure1 =
+{
+  todoId1 : {
+    title: "header", 
+    tasks: [
+      { id: 1stItem, 
+        content: do it,
+        date: 1/1/1
+        isDone: boolean value
+      }, 
+       {
+        id: 2ndItem, 
+        content: do it now,
+        date: 2/1/1
+        isDone: boolean value
+        }
+    ]
+  }
+  todoId2 : {
+    title: "header", 
+    tasks: [
+      { id: 1stItem, 
+        content: do it,
+        date: 1/1/1
+        isDone: boolean value
+      }, 
+       {
+        id: 2ndItem, 
+        content: do it now,
+        date: 2/1/1
+        isDone: boolean value
+        }
+    ]
+  }
+}
+
+dataStructure2 = 
+[
+  {
+    title: "header", 
+    tasks: [
+      { id: 1stItem, 
+        content: do it,
+        date: 1/1/1
+        isDone: boolean value
+      }, 
+       {
+        id: 2ndItem, 
+        content: do it now,
+        date: 2/1/1
+        isDone: boolean value
+        }
+    ]
+  }
+]
+
+\\\\\\\\\\
+
+
+
+
 add file structure ==done==
+
 add test tools ==done==
+
+design the basic todo page template ==done==
+
+design todo card
+
+
