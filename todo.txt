@@ -67,6 +67,12 @@ add test tools ==done==
 
 design the basic todo page template ==done==
 
-design todo card
+design todo card ==done==
+
+show all the todo card which are stored in the dataBase ==done==
+
+add an item to the todo list 
+
+delete one todo card
 
 

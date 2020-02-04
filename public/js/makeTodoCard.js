@@ -7,7 +7,10 @@ const toHtml = function(title, items) {
     <input type="checkbox" id="${item.id}"/><label for="${item.id}">${item.content}</label><br />
   </div><br>`;
       })
-      .join('')
+      .join('') +
+    '<div style="display:flex;justify-content:flex-start; margin-top:10px;">' +
+    '<textarea id="textArea" name="comments"></textarea><button id="button">+</button>' +
+    '</div>'
   );
 };
 
@@ -29,7 +32,8 @@ const makeTodoCard = () => {
     const newTodo = document.createElement('div');
     newTodo.className = 'card';
     const resText = JSON.parse(this.responseText);
-    newTodo.setAttribute('id', this.resText.id);
+
+    newTodo.setAttribute('id', resText.id);
     newTodo.innerHTML = toHtml(resText.title, resText.tasks);
 
     todoList.prepend(newTodo);

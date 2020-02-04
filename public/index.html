@@ -9,7 +9,7 @@
     <script src="./js/makeTodoCard.js"></script>
     <script> 
     const show = () => {
-      console.log('moja');
+
     };
     </script>
     <script>
@@ -38,23 +38,19 @@
             name="title"
             id="title"
             cols="20"
-            placeholder="title"
+            placeholder="  Title..."
             rows="1"
-            onclick="changeSize(20, 2, 'title')"
-            onmouseout="changeSize(20, 1, 'title')"
           ></textarea
           ><br />
           <textarea
             name="comments"
             id="todoBox"
-            cols="40"
-            placeholder="write your todo here(use enter for new item)"
+            cols="70"
+            placeholder="  Write your todo here(Enter for new item)..."
             rows="4"
-            onclick="changeSize(40, 6, 'todoBox')"
-            onmouseout="changeSize(40, 4, 'todoBox')"
           ></textarea
           ><br />
-          <button onclick="isInputPresent()"> add todo </button>
+          <button onclick="isInputPresent()"> Add Todo </button>
       </div>
       <br />
       <div id="todoList">
@@ -64,3 +60,10 @@
     </div>
   </body>
 </html>
+
+
+ <!-- onclick="changeSize(40, 6, 'todoBox')" -->
+            <!-- onmouseout="changeSize(40, 4, 'todoBox')" -->
+
+            
+            
