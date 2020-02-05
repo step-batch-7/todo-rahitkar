@@ -3,17 +3,20 @@ const toHtml = function(title, items) {
     `<div class="todoHeader"><h4 style="color: rgba(0,0,0,0.7);">${title}</h4></div><div onclick= removeTodo()>x</div>` +
     items
       .map(item => {
-        return `<div class="todoItem" id="${item.id}"">
-    <input type="checkbox" id="${item.id + Math.random()}"/><label for="${
-          item.id
-        }">${item.content}</label><br />
-  </div><br>`;
+        return makeItemHtml(item.id, item.content);
       })
       .join('') +
     '<div style="display:flex;justify-content:flex-start; margin-top:10px;">' +
     `<textarea id= "textArea"class="textArea" name="comments"></textarea><button class="button"onclick="addTodoItem()">+</button></div>`;
 
   return html;
+};
+
+const makeItemHtml = (id, content) => {
+  return `<div class="todoItem" id="${id}">
+    <input type="checkbox" id="${id +
+      Math.random()}"/><label for="${id}">${content}</label><br />
+  </div><br>`;
 };
 
 const makeTodoCard = () => {
