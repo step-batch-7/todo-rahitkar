@@ -1,17 +1,19 @@
 const toHtml = function(title, items) {
-  return (
-    `<div class="todoHeader"><h4 style="color: rgba(0,0,0,0.7);">${title}</h4></div>` +
+  const html =
+    `<div class="todoHeader"><h4 style="color: rgba(0,0,0,0.7);">${title}</h4></div><div onclick= removeTodo()>x</div>` +
     items
       .map(item => {
-        return `<div class="todoItem"  onmouseover="show() id="${item.id}"">
-    <input type="checkbox" id="${item.id}"/><label for="${item.id}">${item.content}</label><br />
+        return `<div class="todoItem" id="${item.id}"">
+    <input type="checkbox" id="${item.id + Math.random()}"/><label for="${
+          item.id
+        }">${item.content}</label><br />
   </div><br>`;
       })
       .join('') +
     '<div style="display:flex;justify-content:flex-start; margin-top:10px;">' +
-    '<textarea id="textArea" name="comments"></textarea><button id="button">+</button>' +
-    '</div>'
-  );
+    `<textarea id= "textArea"class="textArea" name="comments"></textarea><button class="button"onclick="addTodoItem()">+</button></div>`;
+
+  return html;
 };
 
 const makeTodoCard = () => {
@@ -34,12 +36,31 @@ const makeTodoCard = () => {
     const resText = JSON.parse(this.responseText);
 
     newTodo.setAttribute('id', resText.id);
-    newTodo.innerHTML = toHtml(resText.title, resText.tasks);
+    newTodo.innerHTML = toHtml(
+      resText.title,
+      resText.tasks,
+      resText.textAreaId
+    );
 
     todoList.prepend(newTodo);
   };
   req.open('POST', '/index.html');
   req.send(JSON.stringify(newTodoData));
+};
+
+const removeTodo = () => {
+  const list = document.querySelector('#todoList');
+  const cardId = event.target.parentElement.id;
+  const card = document.getElementById(cardId);
+  const req = new XMLHttpRequest();
+  req.onload = function() {
+    if (req.status === 200) {
+      list.removeChild(card);
+    }
+  };
+
+  req.open('POST', '/removeTodo');
+  req.send(cardId);
 };
 
 const fetchAllTodoCards = () => {
