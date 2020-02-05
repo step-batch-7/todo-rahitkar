@@ -7,11 +7,7 @@
     <link rel="stylesheet" href="./css/style.css" />
     <script src="./js/changeSize.js"></script>
     <script src="./js/makeTodoCard.js"></script>
-    <script> 
-    const show = () => {
-
-    };
-    </script>
+    
     <script>
       const showRequired = function() {
         setTimeout(() => {
@@ -22,7 +18,7 @@
     </script>
 
     <script>
-      const isInputPresent = () => document.querySelector('#title').value && document.querySelector('#todoBox').value ? makeTodoCard(): showRequired();
+      const isInputPresent = () => document.querySelector('#title').value ? makeTodoCard(): showRequired();
     </script>
     <title>todo</title>
   </head>
@@ -34,22 +30,15 @@
         <h1>Todo</h1>
       </div>
       <div id="writeTodo">
-          <textarea
+          <input
             name="title"
             id="title"
             cols="20"
             placeholder="  Title..."
             rows="1"
-          ></textarea
-          ><br />
-          <textarea
-            name="comments"
-            id="todoBox"
-            cols="70"
-            placeholder="  Write your todo here(Enter for new item)..."
-            rows="4"
-          ></textarea
-          ><br />
+          >
+          <br />
+          
           <button onclick="isInputPresent()"> Add Todo </button>
       </div>
       <br />
@@ -62,8 +51,20 @@
 </html>
 
 
+
  <!-- onclick="changeSize(40, 6, 'todoBox')" -->
             <!-- onmouseout="changeSize(40, 4, 'todoBox')" -->
+            
+            <!-- && document.querySelector('#todoBox').value -->
+
+            <!-- <textarea
+            name="comments"
+            id="todoBox"
+            cols="70"
+            placeholder="  Write your todo here(Enter for new item)..."
+            rows="4"
+          ></textarea
+          ><br /> -->
 
             
             

@@ -1,6 +1,7 @@
 const toHtml = function(title, items) {
   const html =
     `<div class="todoHeader"><h4 style="color: rgba(0,0,0,0.7);">${title}</h4></div><div onclick= removeTodo()>x</div>` +
+    '<div style="justify-content:flex-start; margin-top:10px;">' +
     items
       .map(item => {
         return (
@@ -10,10 +11,19 @@ const toHtml = function(title, items) {
         );
       })
       .join('') +
-    '<div style="display:flex;justify-content:flex-start; margin-top:10px;">' +
-    `<textarea id= "textArea"class="textArea" name="comments"></textarea><button class="button"onclick="addTodoItem()">+</button></div>`;
+    `<input id="textArea" type="text" class="textArea" name="comments"/><button class="button"onclick="addTodoItem()">+</button></div>`;
 
   return html;
+};
+
+const makeCardHtml = title => {
+  const cardHtml = `<div class="todoHeader"><h4 style="color: rgba(0,0,0,0.7);">${title}</h4></div>
+  <div onclick="removeTodo()">x</div>
+  <div>
+  <input id="textArea" type="text" class="textArea" name="comments" />
+  <button class="button" onclick="addTodoItem()">+</button></div>
+  `;
+  return cardHtml;
 };
 
 const makeItemHtml = (id, content) => {
@@ -25,13 +35,11 @@ const makeItemHtml = (id, content) => {
 
 const makeTodoCard = () => {
   const title = document.querySelector('#title').value;
-  const todoItems = document.querySelector('#todoBox').value.split('\n');
+
   document.querySelector('#title').value = '';
-  document.querySelector('#todoBox').value = '';
 
   const newTodoData = {
-    title: title,
-    tasks: todoItems
+    title: title
   };
 
   const req = new XMLHttpRequest();
@@ -43,20 +51,19 @@ const makeTodoCard = () => {
     const resText = JSON.parse(this.responseText);
 
     newTodo.setAttribute('id', resText.id);
-    newTodo.innerHTML = toHtml(
-      resText.title,
-      resText.tasks,
-      resText.textAreaId
+    newTodo.innerHTML = makeCardHtml(
+      resText.title
     );
 
     todoList.prepend(newTodo);
   };
-  req.open('POST', '/index.html');
+  req.open('POST', '/newTodoCard');
   req.send(JSON.stringify(newTodoData));
 };
 
 const addTodoItem = () => {
   const parentId = event.target.parentElement.parentElement.id;
+  
   const texts = Array.from(document.querySelectorAll('#textArea')).map(
     text => text.value
   );
