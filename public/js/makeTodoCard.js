@@ -3,7 +3,11 @@ const toHtml = function(title, items) {
     `<div class="todoHeader"><h4 style="color: rgba(0,0,0,0.7);">${title}</h4></div><div onclick= removeTodo()>x</div>` +
     items
       .map(item => {
-        return makeItemHtml(item.id, item.content);
+        return (
+          `<div class="todoItem" id="${item.id}">` +
+          makeItemHtml(item.id, item.content) +
+          '</div><br></br>'
+        );
       })
       .join('') +
     '<div style="display:flex;justify-content:flex-start; margin-top:10px;">' +
@@ -13,10 +17,10 @@ const toHtml = function(title, items) {
 };
 
 const makeItemHtml = (id, content) => {
-  return `<div class="todoItem" id="${id}">
+  return `
     <input type="checkbox" id="${id +
       Math.random()}"/><label for="${id}">${content}</label><br />
-  </div><br>`;
+ `;
 };
 
 const makeTodoCard = () => {
@@ -49,6 +53,28 @@ const makeTodoCard = () => {
   };
   req.open('POST', '/index.html');
   req.send(JSON.stringify(newTodoData));
+};
+
+const addTodoItem = () => {
+  const parentId = event.target.parentElement.parentElement.id;
+  const texts = Array.from(document.querySelectorAll('#textArea')).map(
+    text => text.value
+  );
+  const text = texts.filter(text => text);
+  const itemData = { id: parentId, content: text };
+
+  const req = new XMLHttpRequest();
+  req.onload = function() {
+    const card = document.getElementById(parentId);
+    const resText = JSON.parse(this.responseText);
+    const item = document.createElement('div');
+    item.className = 'todoItem';
+    item.innerHTML = makeItemHtml(resText.id, resText.content);
+    card.appendChild(item);
+  };
+
+  req.open('POST', '/addItem');
+  req.send(JSON.stringify(itemData));
 };
 
 const removeTodo = () => {
