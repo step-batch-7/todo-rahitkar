@@ -112,5 +112,4 @@ const fetchAllTodoCards = () => {
   req.send();
 };
 
-// reqToggle();
 window.onload = fetchAllTodoCards;
