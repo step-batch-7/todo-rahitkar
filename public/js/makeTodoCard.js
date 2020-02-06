@@ -27,17 +27,32 @@ const makeCardHtml = title => {
 };
 
 const makeItemHtml = (id, content, isDone) => {
-  
   if (isDone) {
     return `
       <input type="checkbox" onclick="toggleStatus()" id="${id +
-        Math.random()}" checked/><label for="${id}">${content}</label><br />
+        Math.random()}" checked/><label for="${id}">${content}<span onclick="deleteItem()">X</span></label><br />
    `;
   }
   return `
   <input type="checkbox" onclick="toggleStatus()" id="${id +
-    Math.random()}"/><label for="${id}">${content}</label><br />
+    Math.random()}"/><label for="${id}">${content}<span onclick="deleteItem()">X</span></label><br />
 `;
+};
+
+const deleteItem = () => {
+  const taskId = event.target.parentElement.parentElement.id;
+  const cardId =
+    event.target.parentElement.parentElement.parentElement.parentElement.id;
+
+  const req = new XMLHttpRequest();
+  req.onload = function() {
+    if (this.status === 200) {
+      const itemToDelete = document.getElementById(taskId);
+      itemToDelete.parentNode.removeChild(itemToDelete);
+    }
+  };
+  req.open('POST', '/removeTodoItem');
+  req.send(JSON.stringify({ cardId, taskId }));
 };
 
 const makeTodoCard = () => {
@@ -117,7 +132,7 @@ const fetchAllTodoCards = () => {
       .map(todoCard => {
         return `<div class="card" id="${todoCard.id}">${toHtml(
           todoCard.title,
-          todoCard.tasks,
+          todoCard.tasks
         )}</div>`;
       })
       .join('');
