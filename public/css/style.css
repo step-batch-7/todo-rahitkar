@@ -81,3 +81,11 @@ button {
 .button {
   font-size: 20px;
 }
+
+.crossButton {
+  color: red;
+  text-align: right;
+  padding-right: 6%;
+  padding-bottom: 6%;
+  font-size: xx-large;
+}
