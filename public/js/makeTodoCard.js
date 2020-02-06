@@ -75,9 +75,9 @@ const addTodoItem = cardId => {
   const texts = allTextAreas.map(text => text.value);
   const [text] = texts.filter(text => text);
 
-  for (let index = 0; index < allTextAreas.length; index++) {
-    allTextAreas[index].value = '';
-  }
+  allTextAreas.forEach(textArea => {
+    textArea.value = '';
+  });
 
   const req = new XMLHttpRequest();
   req.onload = function() {
@@ -86,8 +86,6 @@ const addTodoItem = cardId => {
     const item = document.createElement('div');
     item.className = 'todoItem';
     item.innerHTML = makeItemHtml(cardId, resText) + '</br></br>';
-    // const br = document.createElement('br');
-    // item.appendChild(br).appendChild(br);
     card.appendChild(item);
   };
 
