@@ -12,7 +12,7 @@ const toHtml = function(cardId, title, items) {
         );
       })
       .join('') +
-    `</div><input id="textArea" type="text" class="textArea" name="comments"/><button class="button"onclick="addTodoItem('${cardId}', '${title}')">+</button></div>`;
+    `</div><input id="textArea" type="text" class="textArea" name="comments" placeholder=" add todo item ..."/><button class="button"onclick="addTodoItem('${cardId}', '${title}')">+</button></div>`;
 
   return html;
 };
@@ -28,7 +28,7 @@ const makeItemHtml = (cardId, item) => {
   }
   return `
   <div class="todoItem" id="${item.id}">
-  <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" /><label for="${id}">${content}<span onclick="deleteItem('${cardId}', '${id}')" style="color: red;">  X</span></label></div><br />
+  <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')"/><label for="${id}">${content}<span onclick="deleteItem('${cardId}', '${id}')" style="color: red;">  X</span></label></div><br />
 `;
 };
 
