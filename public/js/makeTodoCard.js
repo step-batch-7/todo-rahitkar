@@ -1,6 +1,6 @@
 const toHtml = function(title, items) {
   const html =
-    `<div class="todoHeader"><h4 style="color: rgba(0,0,0,0.7);">${title}</h4></div><div onclick= removeTodo()>x</div>` +
+    `<div class="todoHeader"><h4 style="color: rgba(0,0,0,0.7);">${title}</h4></div><div onclick= removeTodo()  style="color: red;">x</div>` +
     '<div style="justify-content:flex-start; margin-top:10px;">' +
     items
       .map(item => {
@@ -30,12 +30,12 @@ const makeItemHtml = (id, content, isDone) => {
   if (isDone) {
     return `
       <input type="checkbox" onclick="toggleStatus()" id="${id +
-        Math.random()}" checked/><label for="${id}">${content}<span onclick="deleteItem()">X</span></label><br />
+        Math.random()}" checked/><label for="${id}">${content}<span onclick="deleteItem()" style="color: red;">  X</span></label><br />
    `;
   }
   return `
   <input type="checkbox" onclick="toggleStatus()" id="${id +
-    Math.random()}"/><label for="${id}">${content}<span onclick="deleteItem()">X</span></label><br />
+    Math.random()}"/><label for="${id}">${content}<span onclick="deleteItem()" style="color: red;">  X</span></label><br />
 `;
 };
 

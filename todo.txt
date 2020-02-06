@@ -71,8 +71,12 @@ design todo card ==done==
 
 show all the todo card which are stored in the dataBase ==done==
 
-add an item to the todo list 
+add an item to the todo list ==done==
 
-delete one todo card
+delete one todo card ==done==
+
+hold the check box status ==done==
+
+delete one todoItem ==done==
 
 
