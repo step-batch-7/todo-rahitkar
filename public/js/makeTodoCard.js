@@ -6,7 +6,7 @@ const toHtml = function(title, items) {
       .map(item => {
         return (
           `<div class="todoItem" id="${item.id}">` +
-          makeItemHtml(item.id, item.content) +
+          makeItemHtml(item.id, item.content, item.isDone) +
           '</div><br></br>'
         );
       })
@@ -26,11 +26,18 @@ const makeCardHtml = title => {
   return cardHtml;
 };
 
-const makeItemHtml = (id, content) => {
+const makeItemHtml = (id, content, isDone) => {
+  
+  if (isDone) {
+    return `
+      <input type="checkbox" onclick="toggleStatus()" id="${id +
+        Math.random()}" checked/><label for="${id}">${content}</label><br />
+   `;
+  }
   return `
-    <input type="checkbox" id="${id +
-      Math.random()}"/><label for="${id}">${content}</label><br />
- `;
+  <input type="checkbox" onclick="toggleStatus()" id="${id +
+    Math.random()}"/><label for="${id}">${content}</label><br />
+`;
 };
 
 const makeTodoCard = () => {
@@ -64,7 +71,7 @@ const addTodoItem = () => {
 
   const allTextAreas = Array.from(document.querySelectorAll('#textArea'));
   const texts = allTextAreas.map(text => text.value);
-  const text = texts.filter(text => text);
+  const [text] = texts.filter(text => text);
 
   for (let index = 0; index < allTextAreas.length; index++) {
     allTextAreas[index].value = '';
@@ -76,7 +83,7 @@ const addTodoItem = () => {
     const resText = JSON.parse(this.responseText);
     const item = document.createElement('div');
     item.className = 'todoItem';
-    item.innerHTML = makeItemHtml(resText.id, resText.content);
+    item.innerHTML = makeItemHtml(resText.id, resText.content, resText.isDone);
     card.appendChild(item);
   };
 
@@ -110,13 +117,23 @@ const fetchAllTodoCards = () => {
       .map(todoCard => {
         return `<div class="card" id="${todoCard.id}">${toHtml(
           todoCard.title,
-          todoCard.tasks
+          todoCard.tasks,
         )}</div>`;
       })
       .join('');
   };
   req.open('GET', '/allTodo');
   req.send();
+};
+
+const toggleStatus = () => {
+  const cardId = event.target.parentElement.parentElement.parentElement.id;
+  const taskId = event.target.parentElement.id;
+
+  const req = new XMLHttpRequest();
+
+  req.open('POST', '/toggleIsDoneStatus');
+  req.send(JSON.stringify({ cardId, taskId }));
 };
 
 window.onload = fetchAllTodoCards;
