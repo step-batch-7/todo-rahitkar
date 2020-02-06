@@ -51,9 +51,7 @@ const makeTodoCard = () => {
     const resText = JSON.parse(this.responseText);
 
     newTodo.setAttribute('id', resText.id);
-    newTodo.innerHTML = makeCardHtml(
-      resText.title
-    );
+    newTodo.innerHTML = makeCardHtml(resText.title);
 
     todoList.prepend(newTodo);
   };
@@ -63,12 +61,14 @@ const makeTodoCard = () => {
 
 const addTodoItem = () => {
   const parentId = event.target.parentElement.parentElement.id;
-  
-  const texts = Array.from(document.querySelectorAll('#textArea')).map(
-    text => text.value
-  );
+
+  const allTextAreas = Array.from(document.querySelectorAll('#textArea'));
+  const texts = allTextAreas.map(text => text.value);
   const text = texts.filter(text => text);
-  const itemData = { id: parentId, content: text };
+
+  for (let index = 0; index < allTextAreas.length; index++) {
+    allTextAreas[index].value = '';
+  }
 
   const req = new XMLHttpRequest();
   req.onload = function() {
@@ -81,7 +81,7 @@ const addTodoItem = () => {
   };
 
   req.open('POST', '/addItem');
-  req.send(JSON.stringify(itemData));
+  req.send(JSON.stringify({ id: parentId, content: text }));
 };
 
 const removeTodo = () => {
@@ -105,7 +105,7 @@ const fetchAllTodoCards = () => {
   req.onload = function() {
     const todoList = document.querySelector('#todoList');
 
-    const allTodoCards = JSON.parse(this.responseText);
+    const allTodoCards = JSON.parse(req.responseText);
     todoList.innerHTML = allTodoCards
       .map(todoCard => {
         return `<div class="card" id="${todoCard.id}">${toHtml(
