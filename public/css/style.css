@@ -137,3 +137,8 @@ button {
   height: 26px;
   font-size: large ;
 }
+
+.todoArea {
+  overflow: scroll;
+  height: 200px;
+}
