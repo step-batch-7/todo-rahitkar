@@ -1,7 +1,7 @@
 const toHtml = function(cardId, title, items) {
   const html =
     `
-    <div class="todoHeader"><h4 contenteditable="true" class="title";">${title}</h4></div><div class="crossDiv"><span onclick= removeTodo() class="crossButton">X</span></div>` +
+    <div class="todoHeader"><input value="${title}" class="title";" onchange="editTitle(${cardId})"/></div><div class="crossDiv"><span onclick= removeTodo() class="crossButton">X</span></div>` +
     `<div style="justify-content:flex-start; margin-top:10px;"><div id="todoss-${cardId}">` +
     items
       .map(item => {
@@ -30,25 +30,6 @@ const makeItemHtml = (cardId, item) => {
   <div class="todoItem" id="${item.id}">
   <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')"/> &nbsp <label contenteditable="true" class="itemContent" for="${id}">${content}</label><span onclick="deleteItem('${cardId}', '${id}')" class="itemCrossButton"> &nbsp X</span></div><br />
 `;
-};
-
-const deleteItem = (cardId, taskId) => {
-  const req = new XMLHttpRequest();
-  req.onload = function() {
-    if (this.status === 200) {
-      const itemToDelete = document.getElementById(taskId);
-      itemToDelete.remove();
-    }
-  };
-  req.open('POST', '/removeTodoItem');
-  req.send(JSON.stringify({ cardId, taskId }));
-};
-
-const toggleStatus = (cardId, taskId) => {
-  const req = new XMLHttpRequest();
-
-  req.open('POST', '/toggleIsDoneStatus');
-  req.send(JSON.stringify({ cardId, taskId }));
 };
 
 const fetchAllTodoCards = () => {
@@ -137,6 +118,33 @@ const addTodoItem = cardId => {
   req.open('POST', '/addItem');
 
   req.send(JSON.stringify({ id: cardId, content: text }));
+};
+
+const deleteItem = (cardId, taskId) => {
+  const req = new XMLHttpRequest();
+  req.onload = function() {
+    if (this.status === 200) {
+      const itemToDelete = document.getElementById(taskId);
+      itemToDelete.remove();
+    }
+  };
+  req.open('POST', '/removeTodoItem');
+  req.send(JSON.stringify({ cardId, taskId }));
+};
+
+const toggleStatus = (cardId, taskId) => {
+  const req = new XMLHttpRequest();
+
+  req.open('POST', '/toggleHasDoneStatus');
+  req.send(JSON.stringify({ cardId, taskId }));
+};
+
+const editTitle = cardId => {
+  const title = event.target.value;
+  const req = new XMLHttpRequest();
+
+  req.open('POST', '/editTitle');
+  req.send(JSON.stringify({ cardId, title }));
 };
 
 window.onload = fetchAllTodoCards;
