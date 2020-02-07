@@ -5,21 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./css/style.css" />
+
     <script src="./js/changeSize.js"></script>
     <script src="./js/makeTodoCard.js"></script>
-    
-    <script>
-      const showRequired = function() {
-        setTimeout(() => {
-        document.querySelector('button').innerText = ' add todo ';
-        }, 1000);
-        document.querySelector('button').innerText = 'input required';
-      }
-    </script>
-
-    <script>
-      const isInputPresent = () => document.querySelector('#title').value ? makeTodoCard(): showRequired();
-    </script>
+    <script src="./js/showRequired.js"></script>
+    <script src="./js/isInputPresent.js"></script>
     <title>todo</title>
   </head>
 
@@ -30,14 +20,12 @@
         <h1>Todo</h1>
       </div>
       <div id="writeTodo">
-          <input
-            name="title"
-            id="title"
-            placeholder="  Title..."
-          >
-          <br />
-          
-          <button onclick="isInputPresent()"> Add Todo </button>
+        <input
+        name="title"
+        id="title"
+        placeholder="  Title..."
+        >
+        <button style="outline: none;" onclick="isInputPresent()"> Add Todo </button>
       </div>
       <br />
       <div id="todoList">
