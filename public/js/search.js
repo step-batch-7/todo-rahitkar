@@ -1,4 +1,6 @@
 const searchName = () => {
+  console.log('its hear');
+  
   const titleElements = Array.from(document.querySelectorAll('.title'));
   const searchedName = document.querySelector('.nameSearch').value;
   Array.from(document.querySelectorAll('.card')).forEach(
@@ -6,7 +8,7 @@ const searchName = () => {
   );
 
   titleElements.forEach(titleElement => {
-    if (titleElement.innerText === searchedName) {
+    if (titleElement.innerText.match(new RegExp(searchedName))) {
       const card = titleElement.parentElement.parentElement;
       card.className = 'card';
     }
