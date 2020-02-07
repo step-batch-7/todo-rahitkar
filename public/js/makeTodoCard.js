@@ -44,6 +44,34 @@ const deleteItem = (cardId, taskId) => {
   req.send(JSON.stringify({ cardId, taskId }));
 };
 
+const toggleStatus = (cardId, taskId) => {
+  const req = new XMLHttpRequest();
+
+  req.open('POST', '/toggleIsDoneStatus');
+  req.send(JSON.stringify({ cardId, taskId }));
+};
+
+const fetchAllTodoCards = () => {
+  const req = new XMLHttpRequest();
+  req.onload = function() {
+    const todoList = document.querySelector('#todoList');
+    console.log(req.responseText, '=============');
+
+    const allTodoCards = JSON.parse(req.responseText);
+    todoList.innerHTML = allTodoCards
+      .map(todoCard => {
+        return `<div class="card" id="${todoCard.id}">${toHtml(
+          todoCard.id,
+          todoCard.title,
+          todoCard.tasks
+        )}</div>`;
+      })
+      .join('');
+  };
+  req.open('GET', '/allTodo');
+  req.send();
+};
+
 const makeTodoCard = () => {
   const title = document.querySelector('#title').value;
 
@@ -59,7 +87,7 @@ const makeTodoCard = () => {
     const todoList = document.querySelector('#todoList');
     const newTodo = document.createElement('div');
     newTodo.className = 'card';
-    
+
     const resText = JSON.parse(this.responseText);
 
     newTodo.setAttribute('id', resText.id);
@@ -69,6 +97,21 @@ const makeTodoCard = () => {
   };
   req.open('POST', '/newTodoCard');
   req.send(JSON.stringify(newTodoData));
+};
+
+const removeTodo = () => {
+  const list = document.querySelector('#todoList');
+  const cardId = event.target.parentElement.parentElement.id;
+  const card = document.getElementById(cardId);
+  const req = new XMLHttpRequest();
+  req.onload = function() {
+    if (req.status === 200) {
+      list.removeChild(card);
+    }
+  };
+
+  req.open('POST', '/removeTodo');
+  req.send(cardId);
 };
 
 const addTodoItem = cardId => {
@@ -95,49 +138,6 @@ const addTodoItem = cardId => {
   req.open('POST', '/addItem');
 
   req.send(JSON.stringify({ id: cardId, content: text }));
-};
-
-const removeTodo = () => {
-  const list = document.querySelector('#todoList');
-  const cardId = event.target.parentElement.parentElement.id;
-  const card = document.getElementById(cardId);
-  const req = new XMLHttpRequest();
-  req.onload = function() {
-    if (req.status === 200) {
-      list.removeChild(card);
-    }
-  };
-
-  req.open('POST', '/removeTodo');
-  req.send(cardId);
-};
-
-const fetchAllTodoCards = () => {
-  const req = new XMLHttpRequest();
-
-  req.onload = function() {
-    const todoList = document.querySelector('#todoList');
-
-    const allTodoCards = JSON.parse(req.responseText);
-    todoList.innerHTML = allTodoCards
-      .map(todoCard => {
-        return `<div class="card" id="${todoCard.id}">${toHtml(
-          todoCard.id,
-          todoCard.title,
-          todoCard.tasks
-        )}</div>`;
-      })
-      .join('');
-  };
-  req.open('GET', '/allTodo');
-  req.send();
-};
-
-const toggleStatus = (cardId, taskId) => {
-  const req = new XMLHttpRequest();
-
-  req.open('POST', '/toggleIsDoneStatus');
-  req.send(JSON.stringify({ cardId, taskId }));
 };
 
 window.onload = fetchAllTodoCards;
