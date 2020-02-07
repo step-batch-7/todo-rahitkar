@@ -74,7 +74,9 @@ const addTodoItem = cardId => {
   const allTextAreas = Array.from(document.querySelectorAll('#textArea'));
   const texts = allTextAreas.map(text => text.value);
   const [text] = texts.filter(text => text);
-
+  if (!text) {
+    return;
+  }
   allTextAreas.forEach(textArea => {
     textArea.value = '';
   });
