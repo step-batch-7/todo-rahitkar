@@ -21,14 +21,14 @@ const makeItemHtml = (cardId, item) => {
   const { id, content, hasDone } = item;
   if (hasDone) {
     return `
-    <div class="todoItem" id="${item.id}">
+    <div class="todoItem" id="${id}">
       <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" id="${id +
-      Math.random()}" checked/> &nbsp <label for="${id}">${content}<span class="itemCrossButton" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></label></div><br /> 
+      1}" checked/> &nbsp <label class="itemContent" for="${id}">${content}</label><span class="itemCrossButton" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></div><br /> 
    `;
   }
   return `
   <div class="todoItem" id="${item.id}">
-  <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')"/> &nbsp <label for="${id}">${content}<span onclick="deleteItem('${cardId}', '${id}')" class="itemCrossButton"> &nbsp X</span></label></div><br />
+  <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')"/> &nbsp <label class="itemContent" for="${id}">${content}</label><span onclick="deleteItem('${cardId}', '${id}')" class="itemCrossButton"> &nbsp X</span></div><br />
 `;
 };
 

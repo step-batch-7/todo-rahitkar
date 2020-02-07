@@ -79,4 +79,10 @@ hold the check box status ==done==
 
 delete one todoItem ==done==
 
+classes extracted ==done==
+
+search by name ==done==
+
+search by task 
+
 

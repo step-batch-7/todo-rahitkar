@@ -124,3 +124,7 @@ button {
 .hide {
   display: none;
 }
+
+.itemContent {
+  font-family: sans-serif;
+}
