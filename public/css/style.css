@@ -54,6 +54,7 @@ body {
 
 .todoItem {
   padding-left: 4%;
+  overflow: scroll;
 }
 
 .addTodoItem {
@@ -81,12 +82,22 @@ button {
   font-size: 20px;
 }
 
-.crossButton {
-  color: red;
+.crossDiv {
   text-align: right;
   padding-right: 6%;
   padding-bottom: 6%;
+}
+
+.crossButton {
+  color: red;
+  
   font-size: xx-large;
+  cursor: pointer;
+}
+
+.itemCrossButton {
+  color: red;
+  cursor: pointer;
 }
 
 #title {

@@ -1,7 +1,7 @@
 const toHtml = function(cardId, title, items) {
   const html =
     `
-    <div class="todoHeader"><h4 style="color: rgba(0,0,0,0.7);">${title}</h4></div><div onclick= removeTodo() class="crossButton">X</div>` +
+    <div class="todoHeader"><h4 style="color: rgba(0,0,0,0.7);">${title}</h4></div><div class="crossDiv"><span onclick= removeTodo() class="crossButton">X</span></div>` +
     `<div style="justify-content:flex-start; margin-top:10px;"><div id="todoss-${cardId}">` +
     items
       .map(item => {
@@ -23,12 +23,12 @@ const makeItemHtml = (cardId, item) => {
     return `
     <div class="todoItem" id="${item.id}">
       <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" id="${id +
-      Math.random()}" checked/><label for="${id}">${content}<span onclick="deleteItem('${cardId}', '${id}')" style="color: red;">  X</span></label></div><br />
+      Math.random()}" checked/><label for="${id}">${content}<span class="itemCrossButton" onclick="deleteItem('${cardId}', '${id}')">  X</span></label></div><br /> 
    `;
   }
   return `
   <div class="todoItem" id="${item.id}">
-  <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')"/><label for="${id}">${content}<span onclick="deleteItem('${cardId}', '${id}')" style="color: red;">  X</span></label></div><br />
+  <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')"/><label for="${id}">${content}<span onclick="deleteItem('${cardId}', '${id}')" class="itemCrossButton">  X</span></label></div><br />
 `;
 };
 
@@ -98,7 +98,7 @@ const addTodoItem = cardId => {
 
 const removeTodo = () => {
   const list = document.querySelector('#todoList');
-  const cardId = event.target.parentElement.id;
+  const cardId = event.target.parentElement.parentElement.id;
   const card = document.getElementById(cardId);
   const req = new XMLHttpRequest();
   req.onload = function() {
