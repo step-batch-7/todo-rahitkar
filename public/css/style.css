@@ -24,9 +24,20 @@ body {
 .header {
   padding-top: 1%;
   padding-left: 10%;
+  padding-right: 10%;
   text-align: left;
   font-family: sans-serif;
   display: flex;
+  justify-content: space-between;
+}
+
+.headerLeft {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.headerRight {
+  justify-content: flex-end;
 }
 
 .card {

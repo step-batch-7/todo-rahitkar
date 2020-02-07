@@ -16,16 +16,25 @@
   <body>
     <div id="screen" >
       <div class="header">
+        <div class="headerLeft">
         <img src="./img/logo.png" alt="" height="50px" width="40px"/>
         <h1>Todo</h1>
       </div>
+      <div class="headerRight">
+        <input class="nameSearch" type="text" placeholder="  name search">
+        <input type="button" value="search">
+        <input type="text" placeholder="  task search">
+        <input type="button" value="search">
+      </div>
+      </div>
       <div id="writeTodo">
-        <input
-        name="title"
-        id="title"
-        placeholder="  Title..."
-        >
-        <button style="outline: none;" onclick="isInputPresent()"> Add Todo </button>
+          <input
+            name="title"
+            id="title"
+            placeholder="  Title..."
+          >
+          <br />
+          <button style="outline: none;" onclick="isInputPresent()"> Add Todo </button>
       </div>
       <br />
       <div id="todoList">
