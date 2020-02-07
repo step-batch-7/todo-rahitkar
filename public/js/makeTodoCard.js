@@ -21,15 +21,15 @@ const makeItemHtml = (cardId, item) => {
   const { id, content, hasDone } = item;
   if (hasDone) {
     return `
-    <div class="todoItem" id="${id}">
+    <div class="todoItem" id="${id}" onmouseover="show('${id}')" onmouseout="hide('${id}')">
       <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" id="${id +
-      1}" checked/> &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/><span class="itemCrossButton" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></div><br /> 
+      1}" checked/> &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/><span class="hide" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></div><br /> 
    `;
   }
   return `
-  <div class="todoItem" id="${id}">
+  <div class="todoItem" id="${id}" onmouseover="show('${id}')" onmouseout="hide('${id}')">
     <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" id="${id +
-    1}"/> &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/><span class="itemCrossButton" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></div><br /> 
+    1}"/> &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/><span class="hide" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></div><br /> 
  `;
 };
 
