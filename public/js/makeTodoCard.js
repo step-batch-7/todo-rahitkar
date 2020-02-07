@@ -18,8 +18,8 @@ const toHtml = function(cardId, title, items) {
 };
 
 const makeItemHtml = (cardId, item) => {
-  const { id, content, isDone } = item;
-  if (isDone) {
+  const { id, content, hasDone } = item;
+  if (hasDone) {
     return `
     <div class="todoItem" id="${item.id}">
       <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" id="${id +
@@ -55,7 +55,6 @@ const fetchAllTodoCards = () => {
   const req = new XMLHttpRequest();
   req.onload = function() {
     const todoList = document.querySelector('#todoList');
-    console.log(req.responseText, '=============');
 
     const allTodoCards = JSON.parse(req.responseText);
     todoList.innerHTML = allTodoCards

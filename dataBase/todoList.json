@@ -1,10 +1,1 @@
-[
-  {
-    "id": "1581066922044",
-    "title": "adsfkjhjkahfjk",
-    "tasks": [
-      { "id": "1581066954968", "content": "hello", "hasDone": false },
-      { "id": "1581067520680", "content": "adkfjkahfjk", "hasDone": false }
-    ]
-  }
-]
+[{"id":"1581066922044","title":"adsfkjhjkahfjk","tasks":[{"id":"1581066954968","content":"hello","hasDone":false},{"id":"1581067520680","content":"adkfjkahfjk","hasDone":true}]}]
