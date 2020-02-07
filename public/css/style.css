@@ -51,8 +51,13 @@ body {
   margin-bottom: 60px;
 }
 
-.title {
+.todoTitle {
+  background-color: transparent;
+  border: none;
   color: rgba(0, 0, 0, 0.7);
+  height: 60px;
+  width: auto;
+  font-size: xx-large;
 }
 
 .todoHeader {
@@ -116,7 +121,7 @@ button {
   cursor: pointer;
 }
 
-#title {
+#addTodoTitle {
   height: 32px;
   width: 17%;
 }

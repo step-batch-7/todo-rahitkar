@@ -1,7 +1,7 @@
 const toHtml = function(cardId, title, items) {
   const html =
     `
-    <div class="todoHeader"><input value="${title}" class="title";" onchange="editTitle('${cardId}')"/></div><div class="crossDiv"><span onclick= removeTodo() class="crossButton">X</span></div>` +
+    <div class="todoHeader"><input value="${title}" class="todoTitle";" onchange="editTitle('${cardId}')"/></div><div class="crossDiv"><span onclick= removeTodo() class="crossButton">X</span></div>` +
     `<div style="justify-content:flex-start; margin-top:10px;"><div id="todoss-${cardId}">` +
     items
       .map(item => {
@@ -54,9 +54,9 @@ const fetchAllTodoCards = () => {
 };
 
 const makeTodoCard = () => {
-  const title = document.querySelector('#title').value;
+  const title = document.querySelector('#addTodoTitle').value;
 
-  document.querySelector('#title').value = '';
+  document.querySelector('#addTodoTitle').value = '';
 
   const newTodoData = {
     title: title

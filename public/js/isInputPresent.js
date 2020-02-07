@@ -1,2 +1,2 @@
 const isInputPresent = () =>
-  document.querySelector('#title').value ? makeTodoCard() : showRequired();
+  document.querySelector('#addTodoTitle').value ? makeTodoCard() : showRequired();
