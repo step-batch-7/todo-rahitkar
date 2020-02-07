@@ -1,7 +1,7 @@
 const toHtml = function(cardId, title, items) {
   const html =
     `
-    <div class="todoHeader"><input value="${title}" class="title";" onchange="editTitle(${cardId})"/></div><div class="crossDiv"><span onclick= removeTodo() class="crossButton">X</span></div>` +
+    <div class="todoHeader"><input value="${title}" class="title";" onchange="editTitle('${cardId}')"/></div><div class="crossDiv"><span onclick= removeTodo() class="crossButton">X</span></div>` +
     `<div style="justify-content:flex-start; margin-top:10px;"><div id="todoss-${cardId}">` +
     items
       .map(item => {
@@ -23,13 +23,14 @@ const makeItemHtml = (cardId, item) => {
     return `
     <div class="todoItem" id="${id}">
       <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" id="${id +
-      1}" checked/> &nbsp <label contenteditable="true" class="itemContent" for="${id}">${content}</label><span class="itemCrossButton" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></div><br /> 
+      1}" checked/> &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/><span class="itemCrossButton" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></div><br /> 
    `;
   }
   return `
-  <div class="todoItem" id="${item.id}">
-  <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')"/> &nbsp <label contenteditable="true" class="itemContent" for="${id}">${content}</label><span onclick="deleteItem('${cardId}', '${id}')" class="itemCrossButton"> &nbsp X</span></div><br />
-`;
+  <div class="todoItem" id="${id}">
+    <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" id="${id +
+    1}"/> &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/><span class="itemCrossButton" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></div><br /> 
+ `;
 };
 
 const fetchAllTodoCards = () => {
@@ -145,6 +146,15 @@ const editTitle = cardId => {
 
   req.open('POST', '/editTitle');
   req.send(JSON.stringify({ cardId, title }));
+};
+
+const editItem = (cardId, taskId) => {
+  const content = event.target.value;
+  
+  const req = new XMLHttpRequest();
+
+  req.open('POST', '/editTaskContent');
+  req.send(JSON.stringify({cardId, taskId, content}));
 };
 
 window.onload = fetchAllTodoCards;
