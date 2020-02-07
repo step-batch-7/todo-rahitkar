@@ -1,7 +1,7 @@
 const toHtml = function(cardId, title, items) {
   const html =
     `
-    <div class="todoHeader"><h4 style="color: rgba(0,0,0,0.7);">${title}</h4></div><div class="crossDiv"><span onclick= removeTodo() class="crossButton">X</span></div>` +
+    <div class="todoHeader"><h4 class="title";">${title}</h4></div><div class="crossDiv"><span onclick= removeTodo() class="crossButton">X</span></div>` +
     `<div style="justify-content:flex-start; margin-top:10px;"><div id="todoss-${cardId}">` +
     items
       .map(item => {

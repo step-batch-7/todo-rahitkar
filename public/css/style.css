@@ -51,6 +51,10 @@ body {
   margin-bottom: 60px;
 }
 
+.title {
+  color: rgba(0, 0, 0, 0.7);
+}
+
 .todoHeader {
   margin: 0.1;
   margin-bottom: 4%;
@@ -102,7 +106,7 @@ button {
 
 .crossButton {
   color: red;
-  
+
   font-size: xx-large;
   cursor: pointer;
 }
@@ -115,4 +119,8 @@ button {
 #title {
   height: 32px;
   width: 17%;
+}
+
+.hide {
+  display: none;
 }
