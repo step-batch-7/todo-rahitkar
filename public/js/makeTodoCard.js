@@ -59,6 +59,7 @@ const makeTodoCard = () => {
     const todoList = document.querySelector('#todoList');
     const newTodo = document.createElement('div');
     newTodo.className = 'card';
+    
     const resText = JSON.parse(this.responseText);
 
     newTodo.setAttribute('id', resText.id);
