@@ -54,7 +54,8 @@ body {
 
 .todoItem {
   padding-left: 4%;
-  overflow: scroll;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .addTodoItem {
