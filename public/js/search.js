@@ -4,6 +4,15 @@ const hideAllCards = () => {
   );
 };
 
+const iterate = function(iteratefn, value, times) {
+  if (times === 0) {
+    return value;
+  }
+  return iterate(iteratefn, iteratefn(value), times - 1);
+};
+
+const getParentElement = priValue => priValue.parentElement;
+
 const searchByName = () => {
   const titleElements = Array.from(document.querySelectorAll('.todoTitle'));
 
@@ -19,14 +28,7 @@ const searchByName = () => {
   });
 };
 
-const iterate = function(iteratefn, value, times) {
-  if (times === 0) {
-    return value;
-  }
-  return iterate(iteratefn, iteratefn(value), times - 1);
-};
 
-const getParentElement = priValue => priValue.parentElement;
 
 const searchByTask = () => {
   const taskContentElements = Array.from(

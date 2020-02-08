@@ -18,20 +18,16 @@ const toHtml = function(cardId, title, items) {
 };
 
 const makeItemHtml = (cardId, item) => {
-  
   const { id, content, hasDone } = item;
+  let checked = '';
   if (hasDone) {
-    return `
-    <div class="todoItem" id="${id}" onmouseover="show('${id}')" onmouseout="hide('${id}')">
-      <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" id="${id +
-      1}" checked/> &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/><span class="hide" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></div><br /> 
-   `;
+    checked = 'checked';
   }
   return `
-  <div class="todoItem" id="${id}" onmouseover="show('${id}')" onmouseout="hide('${id}')">
-    <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" id="${id +
-    1}"/> &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/><span class="hide" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></div><br /> 
- `;
+    <div class="todoItem" id="${id}" onmouseover="show('${id}')" onmouseout="hide('${id}')">
+      <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" id="${id +
+    1}" ${checked}/> &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/><span class="hide" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></div><br /> 
+   `;
 };
 
 const fetchAllTodoCards = () => {
@@ -151,11 +147,11 @@ const editTitle = cardId => {
 
 const editItem = (cardId, taskId) => {
   const content = event.target.value;
-  
+
   const req = new XMLHttpRequest();
 
   req.open('POST', '/editTaskContent');
-  req.send(JSON.stringify({cardId, taskId, content}));
+  req.send(JSON.stringify({ cardId, taskId, content }));
 };
 
 window.onload = fetchAllTodoCards;

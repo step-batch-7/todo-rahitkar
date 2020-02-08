@@ -4,6 +4,5 @@ const show = id => {
 };
 
 const hide = id => {
-  document.getElementById(id).children[0].children[2].className =
-  'hide';
+  document.getElementById(id).children[0].children[2].className = 'hide';
 };
