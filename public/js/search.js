@@ -28,8 +28,6 @@ const searchByName = () => {
   });
 };
 
-
-
 const searchByTask = () => {
   const taskContentElements = Array.from(
     document.querySelectorAll('.itemContent')
