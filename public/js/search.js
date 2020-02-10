@@ -1,6 +1,6 @@
 const hideAllCards = () => {
   Array.from(document.querySelectorAll('.card')).forEach(
-    card => (card.className = 'hide')
+    card => card.className = 'hide'
   );
 };
 

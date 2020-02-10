@@ -27,7 +27,7 @@ const makeItemHtml = (cardId, item) => {
     <div class="todoItem" id="${id}" onmouseover="show('${id +
     1}')" onmouseout="hide('${id + 1}')">
       <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" id="${id +
-    2}" ${checked}/> &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/><span id="${id+1}"class="hide" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></div><br /> 
+    2}" ${checked}/> &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/><span id="${id + 1}"class="hide" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></div><br /> 
    `;
 };
 
