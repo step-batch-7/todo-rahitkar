@@ -1,14 +1,18 @@
-const hideAllCards = () => {
-  Array.from(document.querySelectorAll('.card')).forEach(
-    card => card.className = 'hide'
-  );
+const getCards = () => {
+  return Array.from(document.querySelectorAll('.card'));
 };
 
-const iterate = function(iteratefn, value, times) {
+const hideAllCards = () => {
+  Array.from(document.querySelectorAll('.card')).forEach(card => {
+    card.className = 'hide';
+  });
+};
+
+const iterate = function(iterateFn, value, times) {
   if (times === 0) {
     return value;
   }
-  return iterate(iteratefn, iteratefn(value), times - 1);
+  return iterate(iterateFn, iterateFn(value), times - 1);
 };
 
 const getParentElement = priValue => priValue.parentElement;
@@ -22,7 +26,9 @@ const searchByName = () => {
 
   titleElements.forEach(titleElement => {
     if (titleElement.value.match(new RegExp(searchedName))) {
-      const card = titleElement.parentElement.parentElement;
+      const card = iterate(getParentElement, titleElement, 2);
+      console.log(card);
+
       card.className = 'card';
     }
   });
@@ -37,8 +43,9 @@ const searchByTask = () => {
   hideAllCards();
 
   taskContentElements.forEach(taskContentElement => {
-    if (taskContentElement.value.match(new RegExp(searchedTask))) {
+    if (taskContentElement.value.includes(searchedTask)) {
       taskContentElement.style.backgroundColor = 'red';
+
       const card = iterate(getParentElement, taskContentElement, 5);
 
       card.className = 'card';

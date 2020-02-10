@@ -1,3 +1,5 @@
+const okStatusCode = 200;
+
 const toHtml = function(cardId, title, items) {
   const html =
     `
@@ -84,7 +86,7 @@ const removeTodo = () => {
   const card = document.getElementById(cardId);
   const req = new XMLHttpRequest();
   req.onload = function() {
-    if (req.status === 200) {
+    if (req.status === okStatusCode) {
       list.removeChild(card);
     }
   };
@@ -122,7 +124,7 @@ const addTodoItem = cardId => {
 const deleteItem = (cardId, taskId) => {
   const req = new XMLHttpRequest();
   req.onload = function() {
-    if (this.status === 200) {
+    if (this.status === okStatusCode) {
       const itemToDelete = document.getElementById(taskId);
       itemToDelete.remove();
     }

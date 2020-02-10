@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cat <<EOF > .git/hooks/pre-commit  
- npm test && eslint src test *.js;  
+ npm test  
 if [ \$? != 0 ]; then 
 echo "fix the error";
     exit 1
