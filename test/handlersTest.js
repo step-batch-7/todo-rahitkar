@@ -1,7 +1,7 @@
 const fs = require('fs');
 const request = require('supertest');
 const app = require('../lib/handlers');
-const { DATA_STORE } = require('../lib/config');
+const sinon = require('sinon');
 
 describe('GET method', () => {
   it('should direct to index.html for / path', done => {
@@ -42,11 +42,8 @@ describe('GET method', () => {
 });
 
 describe('POST method', () => {
-  const testData = fs.readFileSync(DATA_STORE);
-
-  after(() => {
-    fs.writeFileSync(DATA_STORE, testData);
-  });
+  beforeEach(() => sinon.replace(fs, 'writeFile', () => {}));
+  afterEach(() => sinon.restore());
 
   it('should add new todoCard for /newTodoCard path', done => {
     request(app.serve.bind(app))
@@ -124,4 +121,3 @@ describe('PUT', () => {
       .expect(/method not allowed/);
   });
 });
-

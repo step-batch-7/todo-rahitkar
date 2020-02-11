@@ -91,9 +91,9 @@ make todo title editable ==done==
 
 things to change 
 -------------------------
-check for file exists or not
+--done-- check for file exists or not
 
-in serveAll todo no need to check for the file type it is any way json have to change it that
+--done-- in serveAll todo no need to check for the file type it is any way json have to change it that
 
 change config file 
 
