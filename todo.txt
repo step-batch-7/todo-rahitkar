@@ -105,11 +105,11 @@ things to change
 
 --done-- make function for sending response
 
-remove unnecessary returns
+--done-- remove unnecessary returns
 
-make function for saving to file 
+--done-- make function for saving to file 
 
-change the name of static method of todoCard
+--done-- change the name of static method of todoCard
 
 change addTodoItem function
 
