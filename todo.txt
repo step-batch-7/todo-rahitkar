@@ -105,6 +105,8 @@ things to change
 
 --done-- make function for sending response
 
+remove unnecessary returns
+
 make function for saving to file 
 
 change the name of static method of todoCard
