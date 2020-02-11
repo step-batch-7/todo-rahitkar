@@ -7,9 +7,9 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "export DATA_STORE=$(pwd)/test/resource/testData.json; nyc mocha",
-    "start": "export DATA_STORE=$(pwd)/dataBase/todoList.json; node httpServer.js",
-    "dev": "export DATA_STORE=$(pwd)/dataBase/todoList.json; nodemon httpServer.js"
+    "test": "export DATA_STORE=test/resource/testData.json; nyc mocha",
+    "start": "export DATA_STORE=dataBase/todoList.json; node httpServer.js",
+    "dev": "export DATA_STORE=dataBase/todoList.json; nodemon httpServer.js"
   },
   "repository": {
     "type": "git",
