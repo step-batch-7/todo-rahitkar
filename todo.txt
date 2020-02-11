@@ -113,7 +113,7 @@ things to change
 
 --done-- change the id generation method to a closer function
 
-change addTodoItem function
+--done-- change addTodoItem function
 
 change show&hide file's class assigning method
 
