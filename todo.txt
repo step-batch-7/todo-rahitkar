@@ -101,7 +101,7 @@ things to change
 
 --done-- add a method of findTask in TodoCard
 
-not assigning undefined to variables --- serveRemoveTodo
+--done-- not assigning undefined to variables --- serveRemoveTodo
 
 make function for saving to file and sending response
 
