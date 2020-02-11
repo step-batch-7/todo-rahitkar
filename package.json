@@ -27,5 +27,7 @@
     "nyc": "^15.0.0",
     "supertest": "^4.0.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "chai": "^4.2.0"
+  }
 }

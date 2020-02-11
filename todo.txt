@@ -115,6 +115,10 @@ things to change
 
 --done-- change addTodoItem function
 
+--done-- add functions for get & post request
+
+write unitTests for classes
+
 change show&hide file's class assigning method
 
 have to remove the hole todo item div 
