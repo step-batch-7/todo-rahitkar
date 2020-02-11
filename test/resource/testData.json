@@ -1,34 +1,34 @@
 [
   {
-    "id": "1",
+    "id": 1,
     "title": "test",
     "tasks": [
-      { "id": "11", "content": "data1", "hasDone": false },
-      { "id": "12", "content": "data2", "hasDone": true }
+      { "id": 11, "content": "data1", "hasDone": false },
+      { "id": 12, "content": "data2", "hasDone": true }
     ]
   },
   {
-    "id": "2",
+    "id": 2,
     "title": "test2",
     "tasks": [
-      { "id": "21", "content": "data3", "hasDone": false },
-      { "id": "22", "content": "data4", "hasDone": true }
+      { "id": 21, "content": "data3", "hasDone": false },
+      { "id": 22, "content": "data4", "hasDone": true }
     ]
   },
   {
-    "id": "3",
+    "id": 3,
     "title": "test2",
     "tasks": [
-      { "id": "31", "content": "data5", "hasDone": false },
-      { "id": "32", "content": "data6", "hasDone": true }
+      { "id": 31, "content": "data5", "hasDone": false },
+      { "id": 32, "content": "data6", "hasDone": true }
     ]
   },
   {
-    "id": "4",
+    "id": 4,
     "title": "test2",
     "tasks": [
-      { "id": "41", "content": "data7", "hasDone": false },
-      { "id": "42", "content": "data8", "hasDone": true }
+      { "id": 41, "content": "data7", "hasDone": false },
+      { "id": 42, "content": "data8", "hasDone": true }
     ]
   }
 ]

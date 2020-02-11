@@ -111,11 +111,11 @@ things to change
 
 --done-- change the name of static method of todoCard
 
+--done-- change the id generation method to a closer function
+
 change addTodoItem function
 
 change show&hide file's class assigning method
-
-change the id generation method to a closer function
 
 have to remove the hole todo item div 
 
