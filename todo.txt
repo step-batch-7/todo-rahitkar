@@ -95,11 +95,11 @@ things to change
 
 --done-- in serveAll todo no need to check for the file type it is any way json have to change it that
 
-change config file 
+--done-- change config file 
 
-change the name of function isCorrectPath to isNotCorrectPath
+--done-- change the name of function isCorrectPath to isNotCorrectPath
 
-add a method of find in todoCard
+--done-- add a method of findTask in TodoCard
 
 not assigning undefined to variables --- serveRemoveTodo
 
