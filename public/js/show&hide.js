@@ -1,7 +1,7 @@
 const show = id => {
-  document.getElementById(id).className = 'itemCrossButton';
+  document.getElementById(id).classList.replace('hide', 'itemCrossButton');
 };
 
 const hide = id => {
-  document.getElementById(id).className = 'hide';
+  document.getElementById(id).classList.add('hide');
 };

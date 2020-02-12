@@ -21,9 +21,12 @@
         <img src="./img/logo.png" alt="" height="50px" width="40px"/>
         <h1>Todo</h1>
       </div>
-      <div class="headerRight">
-        <input class="nameSearch" type="text" placeholder="  name search" oninput="searchByName()">
-        <input class="taskSearch" type="text" placeholder="  task search" oninput="searchByTask()">
+      <div class="searchBar">
+        <input class="search" type="search" placeholder="search" oninput="search()">
+        <select class="selector" id="searchedItem">
+          <option>Title</option>
+          <option>Task</option>
+        </select>
       </div>
       </div>
       <div id="writeTodo">

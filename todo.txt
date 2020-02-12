@@ -119,11 +119,12 @@ things to change
 
 --done-- have to remove the hole todo item div 
 
+--done-- change the class of the div which contents search bars
+
+--done-- toggle the search bar
+
+--done-- change show&hide file's class assigning method
+
 write unitTests for classes
 
-change show&hide file's class assigning method
-
-change the class of the div which contents search bars
-
-toggle the search bar
 
