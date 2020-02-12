@@ -3,18 +3,27 @@ const okStatusCode = 200;
 const toHtml = function(cardId, title, items) {
   const html =
     `
-    <div class="todoHeader"><input value="${title}" class="todoTitle";" onchange="editTitle('${cardId}')"/></div><div class="crossDiv"><span onclick= removeTodo() class="crossButton">X</span></div>` +
-    `<div style="justify-content:flex-start; margin-top:10px;"><div id="todoss-${cardId}" class="todoArea">` +
+    <div class="todoHeader">
+      <input value="${title}" class="todoTitle";" onchange="editTitle('${cardId}')"/>
+    </div>
+    <div class="crossDiv">
+      <span onclick= removeTodo("${cardId}") class="crossButton">X</span>
+    </div>` +
+    `<div style="justify-content:flex-start; margin-top:10px;">
+      <div id="todoss-${cardId}" class="todoArea">` +
     items
       .map(item => {
         return (
           `<div class="todoItem" id="${item.id}">` +
           makeItemHtml(cardId, item) +
-          '</div><br></br>'
+          '</div>'
         );
       })
       .join('') +
-    `</div><input id="textArea" type="text" class="textArea" name="comments" placeholder=" add todo item ..."/><button class="button"onclick="addTodoItem('${cardId}', '${title}')">+</button></div>`;
+  `</div>
+    <input id="textArea" type="text" class="textArea" name="comments" placeholder=" add todo item ..."/>
+    <button class="button"onclick="addTodoItem('${cardId}', '${title}')">+</button>
+  </div>`;
 
   return html;
 };
@@ -66,7 +75,7 @@ const makeTodoCard = () => {
   const title = document.querySelector('#addTodoTitle');
   const newTodoData = JSON.stringify({ title: title.value });
 
-  document.querySelector('#addTodoTitle').value = '';
+  title.value = '';
 
   requestHttp('POST', '/newTodoCard', newTodoData, text => {
     const todoList = document.querySelector('#todoList');
@@ -76,41 +85,39 @@ const makeTodoCard = () => {
     newTodo.className = 'card';
     newTodo.setAttribute('id', resText.id);
     newTodo.innerHTML = toHtml(resText.id, resText.title, []);
-
     todoList.prepend(newTodo);
   });
 };
 
-const removeTodo = () => {
+const removeTodo = cardId => {
   const list = document.querySelector('#todoList');
-  const cardId = event.target.parentElement.parentElement.id;
   const card = document.getElementById(cardId);
-
   requestHttp('POST', '/removeTodo', cardId, () => {
     list.removeChild(card);
   });
 };
 
 const addTodoItem = cardId => {
-  const allTextAreas = Array.from(document.querySelectorAll('#textArea'));
-  const texts = allTextAreas.map(text => text.value);
-  const [text] = texts.filter(text => text);
-  if (!text) {
+  const card = document.getElementById(`${cardId}`);
+  const textArea = card.querySelector('#textArea');
+  const content = textArea.value;
+  textArea.value = '';
+  if (!content) {
     return;
   }
-  allTextAreas.forEach(textArea => {
-    textArea.value = '';
-  });
-  const card = JSON.stringify({ id: cardId, content: text });
-
-  requestHttp('POST', '/addItem', card, text => {
-    const card = document.getElementById(`todoss-${cardId}`);
-    const resText = JSON.parse(text);
-    const item = document.createElement('div');
-    item.className = 'todoItem';
-    item.innerHTML = makeItemHtml(cardId, resText) + '</br></br>';
-    card.appendChild(item);
-  });
+  requestHttp(
+    'POST',
+    '/addItem',
+    JSON.stringify({ id: cardId, content }),
+    text => {
+      const card = document.getElementById(`todoss-${cardId}`);
+      const resText = JSON.parse(text);
+      const item = document.createElement('div');
+      item.className = 'todoItem';
+      item.innerHTML = makeItemHtml(cardId, resText);
+      card.appendChild(item);
+    }
+  );
 };
 
 const deleteItem = (cardId, taskId) => {
@@ -119,8 +126,9 @@ const deleteItem = (cardId, taskId) => {
     '/removeTodoItem',
     JSON.stringify({ cardId, taskId }),
     () => {
+      const todoList = document.querySelector(`#todoss-${cardId}`);
       const itemToDelete = document.getElementById(taskId);
-      itemToDelete.remove();
+      todoList.removeChild(itemToDelete);
     }
   );
 };

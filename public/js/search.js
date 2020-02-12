@@ -27,8 +27,6 @@ const searchByName = () => {
   titleElements.forEach(titleElement => {
     if (titleElement.value.match(new RegExp(searchedName))) {
       const card = iterate(getParentElement, titleElement, 2);
-      console.log(card);
-
       card.className = 'card';
     }
   });
