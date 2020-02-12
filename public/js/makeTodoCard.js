@@ -90,7 +90,7 @@ const makeTodoCard = () => {
 const removeTodo = cardId => {
   const list = document.querySelector('#todoList');
   const card = document.getElementById(cardId);
-  requestHttp('POST', '/removeTodo', cardId, () => {
+  requestHttp('POST', '/removeTodo', JSON.stringify({ cardId }), () => {
     list.removeChild(card);
   });
 };

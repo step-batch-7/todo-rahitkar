@@ -58,7 +58,7 @@ describe('POST method', () => {
     request(app.serve.bind(app))
       .post('/removeTodo')
       .set('Accept', '*/*')
-      .send('2')
+      .send('{"cardId":2}')
       .expect(200, done);
   });
 
@@ -92,7 +92,7 @@ describe('POST method', () => {
     request(app.serve.bind(app))
       .post('/editTitle')
       .set('Accept', '*/*')
-      .send('{"cardId":"3","content":"sampleTitle"}')
+      .send('{"cardId":"3","title":"sampleTitle"}')
       .expect(200, done);
   });
 
@@ -110,6 +110,14 @@ describe('POST method', () => {
       .set('Accept', '*/*')
       .expect(404, done)
       .expect(/Not Found/);
+  });
+
+  it('should give 404 status code for request not having all fields', done => {
+    request(app.serve.bind(app))
+      .post('/editTaskContent')
+      .set('Accept', '*/*')
+      .send('{}')
+      .expect(404, done);
   });
 });
 
