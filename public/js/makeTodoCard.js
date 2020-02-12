@@ -1,13 +1,25 @@
 const okStatusCode = 200;
 
+const makeItemHtml = (cardId, item) => {
+  const { id, content, hasDone } = item;
+  let checked = '';
+  if (hasDone) {
+    checked = 'checked';
+  }
+  return `
+    <div class="todoItem" id="${id}" onmouseover="show('cross${id}')" onmouseout="hide('cross${id}')">
+     <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" ${checked}/> 
+     &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/>
+     <img id="cross${id}" class="hide" onclick="deleteItem('${cardId}', '${id}')" src="img/trash-can.svg"/>
+     </div> `;
+};
+
 const toHtml = function(cardId, title, items) {
   const html =
     `
     <div class="todoHeader">
       <input value="${title}" class="todoTitle";" onchange="editTitle('${cardId}')"/>
-    </div>
-    <div class="crossDiv">
-      <span onclick= removeTodo("${cardId}") class="crossButton">X</span>
+        <img onclick= removeTodo("${cardId}") class="crossButton" src="img/trash.svg"/>
     </div>` +
     `<div style="justify-content:flex-start; margin-top:10px;">
       <div id="todoss-${cardId}" class="todoArea">` +
@@ -26,20 +38,6 @@ const toHtml = function(cardId, title, items) {
   </div>`;
 
   return html;
-};
-
-const makeItemHtml = (cardId, item) => {
-  const { id, content, hasDone } = item;
-  let checked = '';
-  if (hasDone) {
-    checked = 'checked';
-  }
-  return `
-    <div class="todoItem" id="${id}" onmouseover="show('cross${id}')" onmouseout="hide('cross${id}')">
-     <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" ${checked}/> 
-     &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/>
-     <span id="cross${id}" class="hide" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span>
-     </div> `;
 };
 
 const requestHttp = (method, url, data, callBack) => {

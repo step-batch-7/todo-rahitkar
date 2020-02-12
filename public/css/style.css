@@ -64,9 +64,11 @@ body {
 .todoHeader {
   margin: 0.1;
   margin-bottom: 4%;
-  padding: 1%;
-  padding-left: 4%;
+  /* padding: 1%; */
+  padding: 1% 4%;
   background-color: #abd6dfff;
+  display: flex;
+  justify-content: space-evenly;
 }
 .textInput {
   border: none;
