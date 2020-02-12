@@ -117,11 +117,11 @@ things to change
 
 --done-- add functions for get & post request
 
+--done-- have to remove the hole todo item div 
+
 write unitTests for classes
 
 change show&hide file's class assigning method
-
-have to remove the hole todo item div 
 
 change the class of the div which contents search bars
 

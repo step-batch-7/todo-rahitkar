@@ -20,7 +20,7 @@ const toHtml = function(cardId, title, items) {
         );
       })
       .join('') +
-  `</div>
+    `</div>
     <input id="textArea" type="text" class="textArea" name="comments" placeholder=" add todo item ..."/>
     <button class="button"onclick="addTodoItem('${cardId}', '${title}')">+</button>
   </div>`;
@@ -35,12 +35,11 @@ const makeItemHtml = (cardId, item) => {
     checked = 'checked';
   }
   return `
-    <div class="todoItem" id="${id}" onmouseover="show('${id +
-    1}')" onmouseout="hide('${id + 1}')">
-      <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" id="${id +
-    2}" ${checked}/> &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/><span id="${id +
-    1}"class="hide" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span></div><br /> 
-   `;
+    <div class="todoItem" id="${id}" onmouseover="show('cross${id}')" onmouseout="hide('cross${id}')">
+     <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" ${checked}/> 
+     &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/>
+     <span id="cross${id}" class="hide" onclick="deleteItem('${cardId}', '${id}')"> &nbsp X</span>
+     </div> `;
 };
 
 const requestHttp = (method, url, data, callBack) => {
@@ -114,6 +113,7 @@ const addTodoItem = cardId => {
       const resText = JSON.parse(text);
       const item = document.createElement('div');
       item.className = 'todoItem';
+      item.id = `${resText.id}`;
       item.innerHTML = makeItemHtml(cardId, resText);
       card.appendChild(item);
     }
