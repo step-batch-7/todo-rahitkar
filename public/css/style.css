@@ -5,7 +5,7 @@ body {
 #screen {
   width: 100vw;
   min-height: 100vh;
-  background-color: #e7ebe0ff;
+  background-color: whitesmoke;
 }
 
 #writeTodo {
@@ -43,8 +43,8 @@ body {
 
 .card {
   padding-bottom: 2%;
-  background-color: #e7ebe0ff;
-  box-shadow: 2px 2px 4px 2px white;
+  background-color:white;
+  box-shadow: 2px 2px 4px 2px grey;
   height: auto;
   width: 360px;
   border-radius: 8px;
@@ -64,7 +64,6 @@ body {
 .todoHeader {
   margin: 0.1;
   margin-bottom: 4%;
-  /* padding: 1%; */
   padding: 1% 4%;
   background-color: #abd6dfff;
   display: flex;
