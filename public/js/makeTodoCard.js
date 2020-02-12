@@ -72,7 +72,8 @@ const fetchAllTodoCards = () => {
 
 const makeTodoCard = () => {
   const title = document.querySelector('#addTodoTitle');
-  const newTodoData = JSON.stringify({ title: title.value });
+  const todoTitle = title.value || 'Title';
+  const newTodoData = JSON.stringify({ title: todoTitle });
 
   title.value = '';
 

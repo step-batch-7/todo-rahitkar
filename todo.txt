@@ -125,6 +125,8 @@ things to change
 
 --done-- change show&hide file's class assigning method
 
+--done-- remove isInputPresent function
+
 write unitTests for classes
 
 
