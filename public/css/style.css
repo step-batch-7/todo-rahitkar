@@ -36,8 +36,9 @@ body {
   justify-content: flex-start;
 }
 
-.headerRight {
-  justify-content: flex-end;
+.searchBar {
+  float: right;
+  width: 25%;
 }
 
 .card {
@@ -135,10 +136,22 @@ button {
   border: none;
   outline: none;
   height: 26px;
-  font-size: large ;
+  font-size: large;
 }
 
 .todoArea {
   overflow: scroll;
   height: 200px;
+}
+
+.search {
+  width: 60%;
+  height: 30%;
+  border-radius: 5px;
+  border: none;
+}
+
+.selector {
+  width: 20%;
+  height: 30%;
 }

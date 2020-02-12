@@ -2,51 +2,29 @@ const getCards = () => {
   return Array.from(document.querySelectorAll('.card'));
 };
 
-const hideAllCards = () => {
-  Array.from(document.querySelectorAll('.card')).forEach(card => {
-    card.className = 'hide';
-  });
+const showTodo = todo => todo.classList.remove('hide');
+
+const hideTodo = todo => todo.classList.add('hide');
+
+const searchByName = (todo, searchedText) => {
+  const title = todo.querySelector('.todoTitle').value;
+  const toggleHide = title.includes(searchedText) ? showTodo : hideTodo;
+  toggleHide(todo);
 };
 
-const iterate = function(iterateFn, value, times) {
-  if (times === 0) {
-    return value;
-  }
-  return iterate(iterateFn, iterateFn(value), times - 1);
+const searchByTask = (todo, searchedText) => {
+  if (searchedText === '') return searchByName(todo, searchedText);
+  const tasks = Array.from(todo.querySelectorAll('.itemContent'));
+  const searchedTasks = tasks.filter(task => task.value.includes(searchedText));
+  
+  const toggleHide = searchedTasks.length !== 0 ? showTodo : hideTodo;
+  toggleHide(todo);
 };
 
-const getParentElement = priValue => priValue.parentElement;
-
-const searchByName = () => {
-  const titleElements = Array.from(document.querySelectorAll('.todoTitle'));
-
-  const searchedName = document.querySelector('.nameSearch').value;
-
-  hideAllCards();
-
-  titleElements.forEach(titleElement => {
-    if (titleElement.value.match(new RegExp(searchedName))) {
-      const card = iterate(getParentElement, titleElement, 2);
-      card.className = 'card';
-    }
-  });
-};
-
-const searchByTask = () => {
-  const taskContentElements = Array.from(
-    document.querySelectorAll('.itemContent')
-  );
-  const searchedTask = document.querySelector('.taskSearch').value;
-
-  hideAllCards();
-
-  taskContentElements.forEach(taskContentElement => {
-    if (taskContentElement.value.includes(searchedTask)) {
-      taskContentElement.style.backgroundColor = 'red';
-
-      const card = iterate(getParentElement, taskContentElement, 5);
-
-      card.className = 'card';
-    }
-  });
+const search = () => {
+  const searchedItem = document.querySelector('#searchedItem').value;
+  const searchedText = document.querySelector('.search').value;
+  const todoList = getCards();
+  const searchItem = searchedItem === 'Title' ? searchByName : searchByTask;
+  todoList.forEach(todo => searchItem(todo, searchedText));
 };
