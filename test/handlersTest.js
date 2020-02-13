@@ -4,7 +4,7 @@ const app = require('../lib/handlers');
 const sinon = require('sinon');
 
 describe('GET method', () => {
-  it('should direct to entryPage.html for / path', done => {
+  it('should direct to entryPage.html for / path if cookie not present', done => {
     request(app.serve.bind(app))
       .get('/')
       .set('Accept', '*/*')
@@ -29,6 +29,15 @@ describe('GET method', () => {
   it('should direct to index.html for /entryPage.html path if cookie is present', done => {
     request(app.serve.bind(app))
       .get('/entryPage.html')
+      .set('Accept', '*/*')
+      .set('Cookie', '{"user":"step7","password":"1234"}')
+      .expect('Location', '/index.html')
+      .expect(301, done);
+  });
+
+  it('should direct to index.html for / path if cookie is present', done => {
+    request(app.serve.bind(app))
+      .get('/')
       .set('Accept', '*/*')
       .set('Cookie', '{"user":"step7","password":"1234"}')
       .expect('Location', '/index.html')
