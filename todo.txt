@@ -131,6 +131,8 @@ things to change
 
 --done-- add handler for entry page
 
+--done-- add handler for home page
+
 send request from client for login and signUp
 
 add handlers to server for login and signUp
