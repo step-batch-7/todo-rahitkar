@@ -1,0 +1,23 @@
+body {
+  font-family: sans-serif;
+  padding: 5% 35%;
+}
+
+.login {
+  border: 1px solid black;
+  padding: 2%;
+  margin: 1%;
+  background-color: whitesmoke;
+}
+
+.signup {
+  border: 1px solid black;
+  padding: 2%;
+  margin: 1%;
+  background-color: whitesmoke;
+  display: none;
+}
+
+input {
+  margin: 1%;
+}
