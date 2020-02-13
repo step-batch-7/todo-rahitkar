@@ -4,14 +4,28 @@ const app = require('../lib/handlers');
 const sinon = require('sinon');
 
 describe('GET method', () => {
-  it('should direct to index.html for / path', done => {
+  it('should direct to entryPage.html for / path', done => {
     request(app.serve.bind(app))
       .get('/')
       .set('Accept', '*/*')
       .expect('Content-Type', /html/)
       .expect(/<title>todo<\/title>/)
+      .expect(/Login/)
+      .expect(/Signup/)
       .expect(200, done);
   });
+
+  it('should direct to entryPage.html for /entryPage.html path', done => {
+    request(app.serve.bind(app))
+      .get('/entryPage.html')
+      .set('Accept', '*/*')
+      .expect('Content-Type', /html/)
+      .expect(/<title>todo<\/title>/)
+      .expect(/Login/)
+      .expect(/Signup/)
+      .expect(200, done);
+  });
+
   it('should fetch all todo cards for /allTodo path', done => {
     request(app.serve.bind(app))
       .get('/allTodo')
@@ -26,7 +40,7 @@ describe('GET method', () => {
       .expect('content-type', /css/)
       .expect(200, done);
   });
-  it('should respond with logo.png for img/logo.png path', function(done) {
+  it('should respond with logo.png for img/logo.png path', function (done) {
     request(app.serve.bind(app))
       .get('/img/logo.png')
       .set('Accept', '*/*')
@@ -42,7 +56,7 @@ describe('GET method', () => {
 });
 
 describe('POST method', () => {
-  beforeEach(() => sinon.replace(fs, 'writeFile', () => {}));
+  beforeEach(() => sinon.replace(fs, 'writeFile', () => { }));
   afterEach(() => sinon.restore());
 
   it('should add new todoCard for /newTodoCard path', done => {

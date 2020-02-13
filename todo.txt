@@ -127,6 +127,16 @@ things to change
 
 --done-- remove isInputPresent function
 
+--done-- add login and signUp page
+
+--done-- add handler for entry page
+
+send request from client for login and signUp
+
+add handlers to server for login and signUp
+
+
+
 write unitTests for classes
 
 

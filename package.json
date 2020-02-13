@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "chai": "^4.2.0",
+    "nodemon": "^2.0.2",
     "sinon": "^8.1.1"
   }
 }
