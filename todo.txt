@@ -133,12 +133,14 @@ things to change
 
 --done-- add handler for home page
 
-send request from client for login and signUp
+--done-- send request from client for login 
 
-add handlers to server for login and signUp
+--done-- add handlers to server for login
 
-
+write test for login handler
 
 write unitTests for classes
 
+send request from client for signUp
 
+add handlers to server for signUp

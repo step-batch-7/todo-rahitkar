@@ -1,5 +1,4 @@
 const okStatusCode = 200;
-
 const makeItemHtml = (cardId, item) => {
   const { id, content, hasDone } = item;
   let checked = '';
@@ -14,7 +13,7 @@ const makeItemHtml = (cardId, item) => {
      </div> `;
 };
 
-const toHtml = function(cardId, title, items) {
+const toHtml = (cardId, title, items) => {
   const html =
     `
     <div class="todoHeader">
@@ -137,7 +136,7 @@ const toggleStatus = (cardId, taskId) => {
     'POST',
     '/toggleHasDoneStatus',
     JSON.stringify({ cardId, taskId }),
-    () => {}
+    () => { }
   );
 };
 
@@ -148,7 +147,7 @@ const editTitle = cardId => {
     'POST',
     '/editTitle',
     JSON.stringify({ cardId, title }),
-    () => {}
+    () => { }
   );
 };
 
@@ -159,8 +158,17 @@ const editItem = (cardId, taskId) => {
     'POST',
     '/editTaskContent',
     JSON.stringify({ cardId, taskId, content }),
-    () => {}
+    () => { }
   );
 };
 
-window.onload = fetchAllTodoCards;
+const login = () => {
+  const login = document.querySelector('.login');
+  const userCredentials = Array.from(login.querySelectorAll('input'));
+  const [userName, password] = userCredentials.map(credential => credential.value);
+  const userDetails = JSON.stringify({ userName, password });
+  requestHttp('POST', '/login', userDetails, () => {
+    console.log('successfully loggedIn')
+  })
+};
+
