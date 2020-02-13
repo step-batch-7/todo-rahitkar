@@ -15,7 +15,7 @@ describe('GET method', () => {
       .expect(200, done);
   });
 
-  it('should direct to entryPage.html for /entryPage.html path', done => {
+  it('should direct to entryPage.html for /entryPage.html path if cookie is not present', done => {
     request(app.serve.bind(app))
       .get('/entryPage.html')
       .set('Accept', '*/*')
@@ -26,6 +26,34 @@ describe('GET method', () => {
       .expect(200, done);
   });
 
+  it('should direct to index.html for /entryPage.html path if cookie is present', done => {
+    request(app.serve.bind(app))
+      .get('/entryPage.html')
+      .set('Accept', '*/*')
+      .set('Cookie', '{"user":"step7","password":"1234"}')
+      .expect('Location', '/index.html')
+      .expect(301, done);
+  });
+
+  it('should direct to index.html for /index.html path if cookie is present', done => {
+    request(app.serve.bind(app))
+      .get('/index.html')
+      .set('Accept', '*/*')
+      .set('Cookie', '{"user":"step7","password":"1234"}')
+      .expect('Content-Type', /html/)
+      .expect(/<title>todo<\/title>/)
+      .expect(/Todo/)
+      .expect(200, done);
+  });
+
+  it('should direct to entryPage.html for /index.html path if cookie is not present', done => {
+    request(app.serve.bind(app))
+      .get('/index.html')
+      .set('Accept', '*/*')
+      .expect('Location', '/entryPage.html')
+      .expect(301, done);
+  });
+
   it('should fetch all todo cards for /allTodo path', done => {
     request(app.serve.bind(app))
       .get('/allTodo')
@@ -33,6 +61,7 @@ describe('GET method', () => {
       .expect('Content-Type', 'application/json')
       .expect(200, done);
   });
+
   it('should respond with style.css for css/style.css path', done => {
     request(app.serve.bind(app))
       .get('/css/style.css')
