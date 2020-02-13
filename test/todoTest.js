@@ -56,4 +56,20 @@ describe('TodoList', () => {
       assert.isFalse(isTodoRemoved);
     });
   });
+
+  describe('getCard', () => {
+    const todoCards = TodoCards.load(todoList);
+    it('should give todo from the todoList  ', () => {
+      const card = JSON.stringify(todoCards.getCard(1));
+      assert.strictEqual(card, JSON.stringify(todoList[0]));
+    });
+    it('should give undefined when id is not present ', () => {
+      assert.isUndefined(todoCards.getCard(1111));
+    });
+
+    it('should give undefined todo when id is undefined', () => {
+      assert.isUndefined(todoCards.getCard());
+    });
+  });
+
 });
