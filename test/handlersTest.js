@@ -31,7 +31,7 @@ describe('GET method', () => {
       .get('/index.html')
       .set('Accept', '*/*')
       .set('Cookie', '{"user":"step7","password":"1234"}')
-      .expect(301, done)
+      .expect(302, done)
       .expect('Location', '/home.html');
   });
 
@@ -41,7 +41,7 @@ describe('GET method', () => {
       .set('Accept', '*/*')
       .set('Cookie', '{"user":"step7","password":"1234"}')
       .expect('Location', '/home.html')
-      .expect(301, done);
+      .expect(302, done);
   });
 
   it('should direct to home.html for /home.html path if cookie is present', done => {
@@ -59,7 +59,7 @@ describe('GET method', () => {
     request(app)
       .get('/home.html')
       .set('Accept', '*/*')
-      .expect(301, done)
+      .expect(302, done)
       .expect('Location', '/index.html');
   });
 
@@ -173,12 +173,12 @@ describe('POST method', () => {
       .expect(/Cannot POST/);
   });
 
-  it('should give 404 status code for request not having all fields', done => {
+  it('should give 400 status code for request not having all fields', done => {
     request(app)
       .post('/editTaskContent')
       .set('Accept', '*/*')
       .send('{}')
-      .expect(404, done);
+      .expect(400, done);
   });
 });
 
