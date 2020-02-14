@@ -193,7 +193,7 @@ describe('TodoList', () => {
       assert.isFalse(todoCards.editTaskContent(1, undefined, 'content'));
     });
     it("should not change the content of task when content is undefined", function () {
-      assert.isFalse(todoCards.editTaskContent(1, 1));
+      assert.isFalse(todoCards.editTaskContent(1, 11));
     });
   });
 });
