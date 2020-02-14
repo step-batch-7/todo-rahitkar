@@ -158,4 +158,20 @@ describe('TodoList', () => {
       assert.isFalse(isToggled);
     });
   });
+
+  describe("editTitle", function () {
+    const todoCards = TodoCards.load(todoList);
+    it("should change the title of one todo for valid cardId", function () {
+      assert.isTrue(todoCards.editTitle(1, 'title'));
+    });
+    it("should not change the title of one todo when cardId is not present", function () {
+      assert.isFalse(todoCards.editTitle(23234, 'title'));
+    });
+    it("should not change the title of one todo when cardId is undefined", function () {
+      assert.isFalse(todoCards.editTitle(undefined, 'title'));
+    });
+    it("should not change the title of one todo when title is undefined", function () {
+      assert.isFalse(todoCards.editTitle(1));
+    });
+  });
 });
