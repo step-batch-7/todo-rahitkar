@@ -72,4 +72,45 @@ describe('TodoList', () => {
     });
   });
 
+  describe("addTodoItem", function () {
+    const todoCards = TodoCards.load(todoList);
+    it("should add a item to a todo card", function () {
+      const isItemAdded = todoCards.addItem(1, 14, 'hello');
+      assert.isTrue(isItemAdded);
+    });
+    it("should not add a item to a todo card if cardId is Undefined", function () {
+      const isItemAdded = todoCards.addItem(undefined, 14, 'hello');
+      assert.isFalse(isItemAdded);
+    });
+    it("should not add a item to a todo card if taskId is Undefined", function () {
+      const isItemAdded = todoCards.addItem(1, undefined, 'hello');
+      assert.isFalse(isItemAdded);
+    });
+
+    it("should not add a item to a todo card if card is not present", function () {
+      const isItemAdded = todoCards.addItem(86, 36, 'hello');
+      assert.isFalse(isItemAdded);
+    });
+  });
+
+  describe("removeTodoItem", function () {
+    const todoCards = TodoCards.load(todoList);
+    it("should remove a item to a todo card", function () {
+      const isItemremoved = todoCards.removeItem(1, 11);
+      assert.isTrue(isItemremoved);
+    });
+    it("should not remove a item to a todo card if cardId is Undefined", function () {
+      const isItemremoved = todoCards.removeItem(undefined, 14);
+      assert.isFalse(isItemremoved);
+    });
+    it("should not remove a item to a todo card if taskId is Undefined", function () {
+      const isItemremoved = todoCards.removeItem(1, undefined);
+      assert.isFalse(isItemremoved);
+    });
+
+    it("should not remove a item to a todo card if card is not present", function () {
+      const isItemremoved = todoCards.removeItem(86, 36);
+      assert.isFalse(isItemremoved);
+    });
+  });
 });
