@@ -174,4 +174,26 @@ describe('TodoList', () => {
       assert.isFalse(todoCards.editTitle(1));
     });
   });
+
+  describe("editTaskContent", function () {
+    const todoCards = TodoCards.load(todoList);
+    it("should change the content of task for valid cardId ,taskId and title", function () {
+      assert.isTrue(todoCards.editTaskContent(1, 11, 'content'));
+    });
+    it("should not change the content of task when cardId is not present", function () {
+      assert.isFalse(todoCards.editTaskContent(23234, 1, 'content'));
+    });
+    it("should not change the content of task when cardId is undefined", function () {
+      assert.isFalse(todoCards.editTaskContent(undefined, 1, 'content'));
+    });
+    it("should not change the content of task when taskId is not present", function () {
+      assert.isFalse(todoCards.editTaskContent(1, 37361, 'content'));
+    });
+    it("should not change the content of task when taskId is undefined", function () {
+      assert.isFalse(todoCards.editTaskContent(1, undefined, 'content'));
+    });
+    it("should not change the content of task when content is undefined", function () {
+      assert.isFalse(todoCards.editTaskContent(1, 1));
+    });
+  });
 });
