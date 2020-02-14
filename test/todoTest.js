@@ -113,4 +113,49 @@ describe('TodoList', () => {
       assert.isFalse(isItemremoved);
     });
   });
+
+  describe('getTask', () => {
+    const todoCards = TodoCards.load(todoList);
+    it('should give task from the  todo in todoList  ', () => {
+      const card = JSON.stringify(todoCards.getTask(1, 11));
+      assert.strictEqual(card, JSON.stringify(todoList[0].tasks[0]));
+    });
+    it('should give undefined when cardId is not present ', () => {
+      assert.isUndefined(todoCards.getTask(1111, 1));
+    });
+
+    it('should give undefined when cardId is undefined', () => {
+      assert.isUndefined(todoCards.getTask(undefined, 1));
+    });
+    it('should give undefined when taskId is not present', () => {
+      assert.isUndefined(todoCards.getTask(1, 1111));
+    });
+    it('should give undefined when taskId is undefined', () => {
+      assert.isUndefined(todoCards.getTask(1));
+    });
+  });
+
+  describe("toggleStatus", function () {
+    const todoCards = TodoCards.load(todoList);
+    it("should toggle the status of task for given valid cardId and taskId", function () {
+      const isToggled = todoCards.toggleStatus(1, 11);
+      assert.isTrue(isToggled);
+    });
+    it("should not toggle the status of task when taskId is not present", function () {
+      const isToggled = todoCards.toggleStatus(1, 11111);
+      assert.isFalse(isToggled);
+    });
+    it("should not toggle the status of task when taskId is undefined", function () {
+      const isToggled = todoCards.toggleStatus(1);
+      assert.isFalse(isToggled);
+    });
+    it("should toggle the status of task when cardId is not present", function () {
+      const isToggled = todoCards.toggleStatus(124, 11);
+      assert.isFalse(isToggled);
+    });
+    it("should toggle the status of task when cardId is undefined", function () {
+      const isToggled = todoCards.toggleStatus(undefined, 11);
+      assert.isFalse(isToggled);
+    });
+  });
 });
