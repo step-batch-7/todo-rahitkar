@@ -41,20 +41,23 @@ const toHtml = (cardId, title, items) => {
 
 const requestHttp = (method, url, data, callBack) => {
   const req = new XMLHttpRequest();
-  req.onload = () => {
-    if (req.status === okStatusCode) {
-      callBack(req.responseText);
+  req.onload = function () {
+    if (this.status === okStatusCode) {
+      callBack(JSON.parse(this.responseText));
     }
   };
-  req.open(method, url);
+  req.open(method, url, true);
+  if (method === 'POST') {
+    req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+  }
   req.send(data);
 };
 
 const fetchAllTodoCards = () => {
-  requestHttp('GET', '/allTodo', '', text => {
+  requestHttp('GET', '/allTodo', null, text => {
     const todoList = document.querySelector('#todoList');
 
-    const allTodoCards = JSON.parse(text);
+    const allTodoCards = text;
     todoList.innerHTML = allTodoCards
       .map(todoCard => {
         return `<div class="card" id="${todoCard.id}">${toHtml(
@@ -77,7 +80,7 @@ const makeTodoCard = () => {
   requestHttp('POST', '/newTodoCard', newTodoData, text => {
     const todoList = document.querySelector('#todoList');
     const newTodo = document.createElement('div');
-    const resText = JSON.parse(text);
+    const resText = text;
 
     newTodo.className = 'card';
     newTodo.setAttribute('id', resText.id);
@@ -108,7 +111,7 @@ const addTodoItem = cardId => {
     JSON.stringify({ id: cardId, content }),
     text => {
       const card = document.getElementById(`todoss-${cardId}`);
-      const resText = JSON.parse(text);
+      const resText = text;
       const item = document.createElement('div');
       item.className = 'todoItem';
       item.id = `${resText.id}`;

@@ -1,8 +1,6 @@
-const http = require('http');
-const app = require('./lib/handlers');
+const { app } = require('./lib/routes');
 
-const server = new http.Server(app.serve.bind(app));
 const port = 4000;
-server.listen(port, () => {
+app.listen(port, () => {
   process.stdout.write('listening started');
 });

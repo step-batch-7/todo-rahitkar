@@ -4,44 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./css/style.css" />
-
-    <script src="./js/requests.js"></script>
-    <script src="./js/search.js"></script>
-    <script src="./js/show&hide.js"></script>
-    <script src="./js/isInputPresent.js"></script>
+    <link rel="stylesheet" href="css/entryStyles.css" />
+    <script src="js/requests.js"></script>
     <title>todo</title>
   </head>
+  <body>
+    <script>
+      const showSignupPage = () => {
+        document.querySelector('.login').style.display = 'none';
+        document.querySelector('.signup').style.display = 'block';
+      };
 
-  <body onload="fetchAllTodoCards()">
-    <div id="screen" >
-      <div class="header">
-        <div class="headerLeft">
-        <img src="./img/logo.png" alt="" height="50px" width="40px"/>
-        <h1>Todo</h1>
-      </div>
-      <div class="searchBar">
-        <input class="search" type="search" placeholder="search" oninput="search()">
-        <select class="selector" id="searchedItem">
-          <option>Title</option>
-          <option>Task</option>
-        </select>
-      </div>
-      </div>
-      <div id="writeTodo">
-          <input
-            name="title"
-            id="addTodoTitle"
-            placeholder="  Title..."
-          >
-          <br />
-          <button style="outline: none;" onclick="makeTodoCard()"> Add Todo </button>
-      </div>
-      <br />
-      <div id="todoList">
-      </div>
-        </div>
-      </div>
+      const showLoginPage = () => {
+        document.querySelector('.login').style.display = 'block';
+        document.querySelector('.signup').style.display = 'none';
+      };
+    </script>
+    <div class="login" align="center">
+      <form action="/login" method="POST">
+        <h1>Login</h1>
+        <input
+          type="text"
+          name="username"
+          placeholder="Enter User Name"
+        /><br />
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter Password"
+        /><br />
+        <input type="submit" value="Login" /><br />
+        <input
+          type="button"
+          value="create an Account ?"
+          onclick="showSignupPage()"
+        /><br />
+      </form>
+    </div>
+
+    <div class="signup" align="center">
+      <h1>Signup</h1>
+      <input type="text" placeholder="Enter your Name" /><br />
+      <input type="email" placeholder="Enter your Email" /><br />
+      <input type="number" placeholder="Enter your phone number" /><br />
+      <input type="password" placeholder="Enter Password" /><br />
+      <input type="password" placeholder="confirm Password" /><br />
+      <input type="submit" value="SignUp" /><br />
+      <input
+        type="button"
+        value="Already have an Account?"
+        onclick="showLoginPage()"
+      /><br />
     </div>
   </body>
 </html>
