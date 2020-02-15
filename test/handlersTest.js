@@ -10,7 +10,6 @@ describe('GET method', () => {
       .set('Accept', '*/*')
       .expect(/<title>todo<\/title>/)
       .expect(/Login/)
-      .expect(/Signup/)
       .expect(200, done);
   });
 
@@ -20,11 +19,10 @@ describe('GET method', () => {
       .set('Accept', '*/*')
       .expect(/<title>todo<\/title>/)
       .expect(/Login/)
-      .expect(/Signup/)
       .expect(200, done);
   });
 
-  it('should direct to home.html for /index.html path if cookie is present', done => {
+  it('should redirect to home.html for /index.html path if cookie is present', done => {
     request(app)
       .get('/index.html')
       .set('Accept', '*/*')
@@ -33,7 +31,7 @@ describe('GET method', () => {
       .expect('Location', '/home.html');
   });
 
-  it('should direct to home.html for / path if cookie is present', done => {
+  it('should redirect to home.html for / path if cookie is present', done => {
     request(app)
       .get('/')
       .set('Accept', '*/*')
@@ -53,7 +51,7 @@ describe('GET method', () => {
       .expect(200, done);
   });
 
-  it('should direct to index.html for /home.html path if cookie is not present', done => {
+  it('should redirect to index.html for /home.html path if cookie is not present', done => {
     request(app)
       .get('/home.html')
       .set('Accept', '*/*')
