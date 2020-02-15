@@ -15,9 +15,17 @@ body {
   padding: 2%;
   margin: 1%;
   background-color: whitesmoke;
-  display: none;
 }
 
 input {
   margin: 1%;
+}
+
+span {
+  font-size: 12px;
+}
+
+a {
+  text-align: center;
+  font-size: 12px;
 }
