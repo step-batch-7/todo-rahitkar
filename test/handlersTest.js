@@ -26,7 +26,7 @@ describe('GET method', () => {
     request(app)
       .get('/index.html')
       .set('Accept', '*/*')
-      .set('Cookie', '{"user":"step7","password":"1234"}')
+      .set('Cookie', 'userName=12345')
       .expect(302, done)
       .expect('Location', '/home.html');
   });
@@ -35,7 +35,7 @@ describe('GET method', () => {
     request(app)
       .get('/')
       .set('Accept', '*/*')
-      .set('Cookie', '{"user":"step7","password":"1234"}')
+      .set('Cookie', 'userName=12345')
       .expect('Location', '/home.html')
       .expect(302, done);
   });
@@ -44,7 +44,7 @@ describe('GET method', () => {
     request(app)
       .get('/home.html')
       .set('Accept', '*/*')
-      .set('Cookie', '{"user":"step7","password":"1234"}')
+      .set('Cookie', 'userName=12345')
       .expect('Content-Type', /html/)
       .expect(/<title>todo<\/title>/)
       .expect(/Todo/)
