@@ -164,14 +164,3 @@ const editItem = (cardId, taskId) => {
     () => { }
   );
 };
-
-const login = () => {
-  const login = document.querySelector('.login');
-  const userCredentials = Array.from(login.querySelectorAll('input'));
-  const [userName, password] = userCredentials.map(credential => credential.value);
-  const userDetails = JSON.stringify({ userName, password });
-  requestHttp('POST', '/login', userDetails, () => {
-    console.log('successfully loggedIn')
-  })
-};
-
