@@ -171,3 +171,13 @@ const editItem = (cardId, taskId) => {
     () => { }
   );
 };
+
+
+const logOut = () => {
+  requestHttp(
+    'GET',
+    '/logout',
+    null,
+    () => { }
+  );
+}

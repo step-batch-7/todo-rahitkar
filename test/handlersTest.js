@@ -80,6 +80,16 @@ describe('GET method', () => {
       .expect(302, done);
   });
 
+  it('should logout and redirect to index page', done => {
+    app.locals.sessions.push({ SID: 1234, username: "someName" });
+    request(app)
+      .get('/logout')
+      .set('Cookie', 'SID=1234')
+      .set('Accept', '*/*')
+      .expect(302, done)
+      .expect('Location', '/index.html');
+  });
+
   it('should respond with style.css for css/style.css path', done => {
     request(app)
       .get('/css/style.css')
@@ -104,6 +114,7 @@ describe('GET method', () => {
       .set('Accept', '*/*')
       .expect(404, done);
   });
+
 });
 
 describe('POST method', () => {

@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  font-size: large;
 }
 
 #screen {
@@ -39,11 +40,13 @@ body {
 .searchBar {
   float: right;
   width: 25%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .card {
   padding-bottom: 2%;
-  background-color:white;
+  background-color: white;
   box-shadow: 2px 2px 4px 2px grey;
   height: auto;
   width: 360px;
@@ -72,6 +75,11 @@ body {
 .textInput {
   border: none;
   outline: none;
+}
+
+input,
+select {
+  font-size: medium;
 }
 
 .todoItem {
@@ -155,4 +163,9 @@ button {
 .selector {
   width: 20%;
   height: 30%;
+}
+
+.logout {
+  height: 6vh;
+  width: auto;
 }
