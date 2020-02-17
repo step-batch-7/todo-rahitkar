@@ -1,7 +1,7 @@
 {
   "someName": {
     "email": "mail@email.com",
-    "password": 1234,
+    "password": "some1234",
     "todoCards": [
       {
         "id": 1,

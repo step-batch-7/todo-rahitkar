@@ -70,6 +70,16 @@ describe('GET method', () => {
       .expect(200, done);
   });
 
+  it('should redirect to index page when session id not found', done => {
+    app.locals.sessions.push({ SID: 1234, username: "someName" });
+    request(app)
+      .get('/allTodo')
+      .set('Cookie', 'SID=123456')
+      .set('Accept', '*/*')
+      .expect('Location', '/index.html')
+      .expect(302, done);
+  });
+
   it('should respond with style.css for css/style.css path', done => {
     request(app)
       .get('/css/style.css')
@@ -198,34 +208,43 @@ describe('POST method', () => {
     request(app)
       .post('/login')
       .set('Accept', '*/*')
-      .send('username=someName&password=1234')
+      .send('username=someName&password=some1234')
       .expect(302, done)
       .expect('Location', '/home.html');
-  })
+  });
 
-  it('should not  login and redirect to index page for valid credentials', done => {
+  it('should not login and redirect to index page for invalid credentials', done => {
     request(app)
       .post('/login')
       .set('Accept', '*/*')
       .send('username=someName&password=123242')
       .expect(302, done)
       .expect('Location', '/index.html');
-  })
+  });
 
   it('should signup and redirect to index page for valid details', done => {
     request(app)
       .post('/signup')
       .set('Accept', '*/*')
-      .send('username=step&password=1234&email=step7@gmail.com')
+      .send('username=step&password=some1234&email=step7@gmail.com')
       .expect(302, done)
       .expect('Location', '/index.html');
-  })
+  });
 
-  it('should not  signup and redirect to signup page for invalid details', done => {
+  it('should not signup and redirect to signup page for invalid details', done => {
     request(app)
       .post('/signup')
       .set('Accept', '*/*')
       .send('username=someName&password=123242&email=mail@gmail.com')
+      .expect(302, done)
+      .expect('Location', '/signup.html');
+  })
+
+  it('should not signup and redirect to signup page for invalid email format', done => {
+    request(app)
+      .post('/signup')
+      .set('Accept', '*/*')
+      .send('username=someName&password=123242&email=mail@yahoo.com')
       .expect(302, done)
       .expect('Location', '/signup.html');
   })
