@@ -61,7 +61,7 @@ describe('GET method', () => {
   });
 
   it('should fetch all todo cards for /allTodo path', done => {
-    app.locals.sessions.push({ SID: 1234, username: "rahit" });
+    app.locals.sessions.push({ SID: 1234, username: "someName" });
     request(app)
       .get('/allTodo')
       .set('Cookie', 'SID=1234')
@@ -87,7 +87,7 @@ describe('GET method', () => {
   });
 
   it('should respond with status code 404 for non existing file', done => {
-    app.locals.sessions.push({ SID: 1234, username: "rahit" });
+    app.locals.sessions.push({ SID: 1234, username: "someName" });
     request(app)
       .get('/badFile')
       .set('Cookie', 'SID=1234')
@@ -99,7 +99,7 @@ describe('GET method', () => {
 describe('POST method', () => {
   beforeEach(() => {
     sinon.replace(fs, 'writeFile', () => { });
-    app.locals.sessions.push({ SID: 1234, username: "rahit" });
+    app.locals.sessions.push({ SID: 1234, username: "someName" });
   });
   afterEach(() => sinon.restore());
 
@@ -193,6 +193,42 @@ describe('POST method', () => {
       .send('{}')
       .expect(400, done);
   });
+
+  it('should login and redirect to home page for valid credentials', done => {
+    request(app)
+      .post('/login')
+      .set('Accept', '*/*')
+      .send('username=someName&password=1234')
+      .expect(302, done)
+      .expect('Location', '/home.html');
+  })
+
+  it('should not  login and redirect to index page for valid credentials', done => {
+    request(app)
+      .post('/login')
+      .set('Accept', '*/*')
+      .send('username=someName&password=123242')
+      .expect(302, done)
+      .expect('Location', '/index.html');
+  })
+
+  it('should signup and redirect to index page for valid details', done => {
+    request(app)
+      .post('/signup')
+      .set('Accept', '*/*')
+      .send('username=step&password=1234&email=step7@gmail.com')
+      .expect(302, done)
+      .expect('Location', '/index.html');
+  })
+
+  it('should not  signup and redirect to signup page for invalid details', done => {
+    request(app)
+      .post('/signup')
+      .set('Accept', '*/*')
+      .send('username=someName&password=123242&email=mail@gmail.com')
+      .expect(302, done)
+      .expect('Location', '/signup.html');
+  })
 });
 
 describe('PUT', () => {
