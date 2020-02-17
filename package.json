@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "export DATA_STORE=test/resource/testData.json; nyc mocha",
-    "start": "export DATA_STORE=dataBase/todoList.json; node httpServer.js",
-    "dev": "export DATA_STORE=dataBase/todoList.json; nodemon httpServer.js"
+    "start": "export DATA_STORE=dataBase/todoList.json; node server.js",
+    "dev": "export DATA_STORE=dataBase/todoList.json; nodemon server.js"
   },
   "repository": {
     "type": "git",

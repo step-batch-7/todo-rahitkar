@@ -1,6 +1,7 @@
 const fs = require('fs');
 const request = require('supertest');
-const { app } = require('../lib/routes');
+const { app } = require('../lib/app');
+const { Users } = require('../lib/users');
 const sinon = require('sinon');
 
 describe('GET method', () => {
@@ -60,8 +61,10 @@ describe('GET method', () => {
   });
 
   it('should fetch all todo cards for /allTodo path', done => {
+    app.locals.sessions.push({ SID: 1234, username: "rahit" });
     request(app)
       .get('/allTodo')
+      .set('Cookie', 'SID=1234')
       .set('Accept', '*/*')
       .expect('Content-Type', 'application/json')
       .expect(200, done);
@@ -84,21 +87,27 @@ describe('GET method', () => {
   });
 
   it('should respond with status code 404 for non existing file', done => {
+    app.locals.sessions.push({ SID: 1234, username: "rahit" });
     request(app)
       .get('/badFile')
+      .set('Cookie', 'SID=1234')
       .set('Accept', '*/*')
       .expect(404, done);
   });
 });
 
 describe('POST method', () => {
-  beforeEach(() => sinon.replace(fs, 'writeFile', () => { }));
+  beforeEach(() => {
+    sinon.replace(fs, 'writeFile', () => { });
+    app.locals.sessions.push({ SID: 1234, username: "rahit" });
+  });
   afterEach(() => sinon.restore());
 
   it('should add new todoCard for /newTodoCard path', done => {
     request(app)
       .post('/newTodoCard')
       .set('Accept', '*/*')
+      .set('Cookie', 'SID=1234')
       .set('Content-Type', 'application/json;charset=UTF-8')
       .send('{"title":"sampleData"}')
       .expect(200, done)
@@ -109,6 +118,7 @@ describe('POST method', () => {
     request(app)
       .post('/removeTodo')
       .set('Accept', '*/*')
+      .set('Cookie', 'SID=1234')
       .set('Content-Type', 'application/json;charset=UTF-8')
       .send('{"cardId":2}')
       .expect(200, done);
@@ -118,6 +128,7 @@ describe('POST method', () => {
     request(app)
       .post('/toggleHasDoneStatus')
       .set('Accept', '*/*')
+      .set('Cookie', 'SID=1234')
       .set('Content-Type', 'application/json;charset=UTF-8')
       .send('{"cardId":"1","taskId":"11"}')
       .expect(200, done)
@@ -128,6 +139,7 @@ describe('POST method', () => {
     request(app)
       .post('/addItem')
       .set('Accept', '*/*')
+      .set('Cookie', 'SID=1234')
       .set('Content-Type', 'application/json;charset=UTF-8')
       .send('{"id":"1","content":"sampleData"}')
       .expect(200, done)
@@ -138,6 +150,7 @@ describe('POST method', () => {
     request(app)
       .post('/removeTodoItem')
       .set('Accept', '*/*')
+      .set('Cookie', 'SID=1234')
       .set('Content-Type', 'application/json;charset=UTF-8')
       .send('{"cardId":"3","taskId":"31"}')
       .expect(200, done);
@@ -147,6 +160,7 @@ describe('POST method', () => {
     request(app)
       .post('/editTitle')
       .set('Accept', '*/*')
+      .set('Cookie', 'SID=1234')
       .set('Content-Type', 'application/json;charset=UTF-8')
       .send('{"cardId":"3","title":"sampleTitle"}')
       .expect(200, done);
@@ -156,6 +170,7 @@ describe('POST method', () => {
     request(app)
       .post('/editTaskContent')
       .set('Accept', '*/*')
+      .set('Cookie', 'SID=1234')
       .set('Content-Type', 'application/json;charset=UTF-8')
       .send('{"cardId":"4","content":"sampleTitle", "taskId":"41"}')
       .expect(200, done);
@@ -165,6 +180,7 @@ describe('POST method', () => {
     request(app)
       .post('/badUrl')
       .set('Accept', '*/*')
+      .set('Cookie', 'SID=1234')
       .expect(404, done)
       .expect(/Cannot POST/);
   });
@@ -173,6 +189,7 @@ describe('POST method', () => {
     request(app)
       .post('/editTaskContent')
       .set('Accept', '*/*')
+      .set('Cookie', 'SID=1234')
       .send('{}')
       .expect(400, done);
   });
@@ -180,8 +197,10 @@ describe('POST method', () => {
 
 describe('PUT', () => {
   it('should give method not allowed', done => {
+    app.locals.sessions.push({ SID: 1234, username: "rahit" });
     request(app)
       .put('/badUrl')
+      .set('Cookie', 'SID=1234')
       .expect(404, done)
       .expect(/Cannot PUT/);
   });

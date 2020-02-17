@@ -43,7 +43,14 @@ const requestHttp = (method, url, data, callBack) => {
   const req = new XMLHttpRequest();
   req.onload = function () {
     if (this.status === okStatusCode) {
-      callBack(JSON.parse(this.responseText));
+      const contentType = this.getResponseHeader('content-type');
+      if (contentType === 'application/json') {
+        callBack(JSON.parse(this.responseText));
+        return;
+      }
+      document.open();
+      document.write(this.responseText);
+      document.close();
     }
   };
   req.open(method, url, true);

@@ -13,7 +13,7 @@
       },
       {
         "id": 2,
-        "title": "test2",
+        "title": "test3",
         "tasks": [
           { "id": 21, "content": "data3", "hasDone": false },
           { "id": 22, "content": "data4", "hasDone": true }
@@ -21,7 +21,7 @@
       },
       {
         "id": 3,
-        "title": "test2",
+        "title": "test4",
         "tasks": [
           { "id": 31, "content": "data5", "hasDone": false },
           { "id": 32, "content": "data6", "hasDone": true }
