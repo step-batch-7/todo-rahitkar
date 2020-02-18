@@ -167,5 +167,11 @@ button {
 
 .logout {
   height: 6vh;
+
   width: auto;
+}
+
+.checked {
+  color: rgb(150, 149, 149);
+  outline: none;
 }

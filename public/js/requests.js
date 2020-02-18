@@ -6,9 +6,9 @@ const makeItemHtml = (cardId, item) => {
     checked = 'checked';
   }
   return `
-    <div class="todoItem" id="${id}" onmouseover="show('cross${id}')" onmouseout="hide('cross${id}')">
+    <div class="todoItem" id="id${id}" onmouseover="show('cross${id}')" onmouseout="hide('cross${id}')">
      <input type="checkbox" onclick="toggleStatus('${cardId}', '${id}')" ${checked}/> 
-     &nbsp <input value="${content}" class="itemContent" onchange="editItem('${cardId}', '${id}')"/>
+     &nbsp <input class="${checked} itemContent" value="${content}" class="" onchange="editItem('${cardId}', '${id}')"/>
      <img id="cross${id}" class="hide" onclick="deleteItem('${cardId}', '${id}')" src="img/trash-can.svg"/>
      </div> `;
 };
@@ -142,12 +142,19 @@ const deleteItem = (cardId, taskId) => {
 };
 
 const toggleStatus = (cardId, taskId) => {
+  const task = document.getElementById(`id${taskId}`);
+  const item = task.querySelector('.itemContent');
   requestHttp(
     'POST',
     '/toggleHasDoneStatus',
     JSON.stringify({ cardId, taskId }),
     () => { }
   );
+  if (item.classList.contains('checked')) {
+    item.classList.remove('checked');
+    return;
+  }
+  item.classList.add('checked');
 };
 
 const editTitle = cardId => {

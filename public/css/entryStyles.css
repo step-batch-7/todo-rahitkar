@@ -1,6 +1,6 @@
 body {
   font-family: sans-serif;
-  padding: 5% 35%;
+  padding: 5% 30%;
   font-size: large;
 }
 
@@ -23,11 +23,15 @@ input {
   font-size: large;
 }
 
+input text {
+  width: 80%;
+}
+
 span {
   font-size: 12px;
 }
 
 a {
   text-align: center;
-  font-size: 12px;
+  font-size: 20px;
 }
